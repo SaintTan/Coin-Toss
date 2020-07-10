@@ -140,6 +140,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Broker.cpp" />
+    <ClCompile Include="Market.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Broker.h" />
+    <ClInclude Include="Market.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Market.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
