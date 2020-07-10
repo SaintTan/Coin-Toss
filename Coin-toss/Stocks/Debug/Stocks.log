@@ -1,9 +1,0 @@
-﻿  StockRecord.cpp
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Stocks\StockRecord.cpp(16,2): error C2953: 'StockRecord': class template has already been defined
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Stocks\StockRecord.cpp(6): message : see declaration of 'StockRecord'
-  Stock.cpp
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Stocks\Stock.cpp(24,2): error C2953: 'Stock': class template has already been defined
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Stocks\Stock.cpp(7): message : see declaration of 'Stock'
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Stocks\Stock.cpp(30,60): error C2514: 'Stock': class template cannot be constructed
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Stocks\Stock.cpp(7): message : see declaration of 'Stock'
-  Generating Code...

@@ -1,6 +1,0 @@
-﻿  Broker.cpp
-  Market.cpp
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Coin-toss\Market.cpp(30,2): error C2989: 'Market': class template has already been declared as a non-class template
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Coin-toss\Market.h(2): message : see declaration of 'Market'
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-toss\Coin-toss\Market.cpp(6): error C3857: 'Market': multiple template parameter lists are not allowed
-  Generating Code...
