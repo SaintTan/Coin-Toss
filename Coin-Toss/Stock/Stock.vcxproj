@@ -139,14 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CandleStick.cpp" />
-    <ClCompile Include="Stock.cpp" />
-    <ClCompile Include="StockRecord.cpp" />
+    <ClCompile Include="src\CandleStick.cpp" />
+    <ClCompile Include="src\Stock.cpp" />
+    <ClCompile Include="src\StockRecord.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CandleStick.h" />
-    <ClInclude Include="Stock.h" />
-    <ClInclude Include="StockRecord.h" />
+    <ClInclude Include="src\CandleStick.h" />
+    <ClInclude Include="src\Stock.h" />
+    <ClInclude Include="src\StockRecord.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

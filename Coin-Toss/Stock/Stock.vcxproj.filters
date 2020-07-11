@@ -15,24 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Stock.cpp">
+    <ClCompile Include="src\CandleStick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StockRecord.cpp">
+    <ClCompile Include="src\Stock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CandleStick.cpp">
+    <ClCompile Include="src\StockRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Stock.h">
+    <ClInclude Include="src\CandleStick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StockRecord.h">
+    <ClInclude Include="src\Stock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CandleStick.h">
+    <ClInclude Include="src\StockRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
