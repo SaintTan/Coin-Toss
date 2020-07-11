@@ -1,5 +1,0 @@
-﻿  CandleStick.cpp
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-Toss\Stock\src\CandleStick.cpp(7,105): error C2440: 'initializing': cannot convert from 'initializer list' to 'const std::chrono::milliseconds'
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coin-Toss\Stock\src\CandleStick.cpp(7,105): message : No constructor could take the source type, or constructor overload resolution was ambiguous
-  StockRecord.cpp
-  Generating Code...
