@@ -21,12 +21,18 @@
     <ClCompile Include="StockRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CandleStick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StockRecord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CandleStick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
