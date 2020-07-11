@@ -1,1 +1,1 @@
-.vs
+Coin-Toss/.vs
