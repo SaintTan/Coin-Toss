@@ -13,6 +13,7 @@ private:
 	unsigned int s_totalVol;
 public:
 	Stock(const std::string&, std::array<float, size>&, std::array<float, size>&, std::array<unsigned int, size>&, std::array<unsigned int, size>&, unsigned int); //stockID, s_topCurPrice_B, s_topCurPrice_S, s_topCurVol_B, s_topCurVol_S, total_vol
+	~Stock();
 protected:
 };
 

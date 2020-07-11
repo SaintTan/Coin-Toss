@@ -17,8 +17,8 @@ std::chrono::milliseconds IDManagement::getNewIntervals() {
 	return intervals[currentID - ID - 1];
 }
 
-CandleStick::CandleStick()
-	:cs_maxPrice(0), cs_minPrice(0), cs_openPrice(0), cs_closePrice(0),
+CandleStick::CandleStick(float max_price, float min_price)
+	:cs_maxPrice(max_price), cs_minPrice(min_price), cs_openPrice(0), cs_closePrice(max_price),
 	cs_timeInterval(IDManagement::getNewIntervals()), cs_startTime(CandleStick::getCurrentTime()), cs_candleID(IDManagement::getNewID()){
 }
 

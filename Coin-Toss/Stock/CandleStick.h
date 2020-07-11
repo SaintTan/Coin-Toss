@@ -18,7 +18,7 @@ private:
 	std::chrono::milliseconds cs_startTime;
 	std::chrono::milliseconds cs_timeInterval;
 public:
-	CandleStick(); 
+	CandleStick(float, float); //maxPrice, minPrice
 	void updateCandleStick(float, float); //maxPrice, minPrice
 protected:
 	static std::chrono::milliseconds getCurrentTime();
