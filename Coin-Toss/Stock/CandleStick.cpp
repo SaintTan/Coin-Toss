@@ -1,7 +1,11 @@
 #include "CandleStick.h"
 #include <iostream>
 
-char IDManagement::currentID = 97;
+static const int ID = 97;
+
+char IDManagement::currentID = ID;
+const std::chrono::milliseconds IDManagement::intervals[5] = {std::chrono::milliseconds(1000), std::chrono::milliseconds(5000), 
+	std::chrono::milliseconds(10000), std::chrono::milliseconds(60000), std::chrono::milliseconds(300000) }; // 1 sec, 5 sec, 10 sec, 1 min , 5 min
 
 IDManagement::IDManagement() {}
 
@@ -9,9 +13,38 @@ char IDManagement::getNewID() {
 	return (char)currentID++;
 }
 
-CandleStick::CandleStick(float timeInterval)
-	:cs_maxPrice(0), cs_minPrice(0), cs_openPrice(0), cs_closePrice(0),cs_timeInterval(timeInterval){
-	cs_candleID= IDManagement::getNewID();
-	std::cout << cs_candleID << std::endl;
+std::chrono::milliseconds IDManagement::getNewIntervals() {
+	return intervals[currentID - ID - 1];
 }
 
+CandleStick::CandleStick()
+	:cs_maxPrice(0), cs_minPrice(0), cs_openPrice(0), cs_closePrice(0),
+	cs_timeInterval(IDManagement::getNewIntervals()), cs_startTime(CandleStick::getCurrentTime()), cs_candleID(IDManagement::getNewID()){
+}
+
+void CandleStick::updateCandleStick(float max_price, float min_price) {
+	std::chrono::milliseconds currentTime = CandleStick::getCurrentTime();
+	if ((currentTime.count() - cs_startTime.count()) > cs_timeInterval.count()) {
+		cs_startTime = currentTime;
+		cs_maxPrice = max_price;
+		cs_minPrice = min_price;
+		cs_openPrice = cs_closePrice;
+		cs_closePrice = max_price;
+		return;
+	}
+	else {
+		if (cs_maxPrice < max_price) {
+			cs_maxPrice = max_price;
+		}
+		if (cs_minPrice > min_price) {
+			cs_minPrice = min_price;
+		}
+		return;
+	}
+}
+
+std::chrono::milliseconds CandleStick::getCurrentTime() {
+	std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
+	auto now_ms = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
+	return now_ms.time_since_epoch();
+}
