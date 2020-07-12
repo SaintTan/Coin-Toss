@@ -11,6 +11,7 @@ namespace Stock {
 		std::array<CandleStick, size_cs> sr_candleSticks;
 	public:
 		StockRecord(std::array<int, size_cs>&); //cs_Interval
+		void updateStockRecord(std::array<float, size>&, std::array<float, size>&, std::array<unsigned int, size>&, std::array<unsigned int, size>&);
 		~StockRecord();
 	protected:
 	};
