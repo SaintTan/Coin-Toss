@@ -14,27 +14,34 @@ void Stock::Stock<size, size_cs>::updateStock(int totalVol) {
 }
 
 template<size_t size, size_t size_cs>
-Stock::Stock<size, size_cs>::~Stock() {};
+Stock::Stock<size, size_cs>::~Stock() {
+	s_stockRecord.~StockRecord();
+};
 
-int main() {
-	const std::string stockID("001");
-	std::array<float, 3> topCurPrice_B{ 3,2,1 };
-	std::array<float, 3> topCurPrice_S{ 4,5,6 };
-	std::array<unsigned int, 3>topCurVol_B{ 10,9,8 };
-	std::array<unsigned int, 3>topCurVol_S{ 7,6,11 };
-	std::array<int, 5>intervals{ 4,5,6,7,8 };
-	unsigned int totalvol = 1 + 2 + 3;
-
-	{ 
-		{
-			Stock::Stock<3, 5> stock(stockID, topCurPrice_B, topCurPrice_S, topCurVol_B, topCurVol_S, intervals, totalvol);
-			topCurPrice_B = { 13,12,11 };
-			topCurPrice_S = { 14,15,16 };
-			topCurVol_B = { 20,19,18 };
-			topCurVol_S = { 17,16,21 };
-			intervals = { 14,15,16,17,18 };
-			totalvol = 11 + 12 + 13;
-			stock.updateStock(totalvol);
-		}
-	}
-}
+//int main() {
+//	const std::string stockID("001");
+//	std::array<float, 3> topCurPrice_B{ 3,2,1 };
+//	std::array<float, 3> topCurPrice_S{ 4,5,6 };
+//	std::array<unsigned int, 3>topCurVol_B{ 10,9,8 };
+//	std::array<unsigned int, 3>topCurVol_S{ 7,6,11 };
+//	std::array<int, 5>intervals{ 4,5,6,7,8 };
+//	unsigned int totalvol = 1 + 2 + 3;
+//
+//	{ 
+//		{
+//			Stock::Stock<3, 5>* stock = new Stock::Stock<3,5>(stockID, topCurPrice_B, topCurPrice_S, topCurVol_B, topCurVol_S, intervals, totalvol);
+//			Stock::Stock<3, 5>* stock1 = new Stock::Stock<3, 5>(stockID, topCurPrice_B, topCurPrice_S, topCurVol_B, topCurVol_S, intervals, totalvol);
+//			Stock::Stock<3, 5>* stock2 = new Stock::Stock<3, 5>(stockID, topCurPrice_B, topCurPrice_S, topCurVol_B, topCurVol_S, intervals, totalvol);
+//			topCurPrice_B = { 13,12,11 };
+//			topCurPrice_S = { 14,15,16 };
+//			topCurVol_B = { 20,19,18 };
+//			topCurVol_S = { 17,16,21 };
+//			intervals = { 14,15,16,17,18 };
+//			totalvol = 11 + 12 + 13;
+//			(*stock).updateStock(totalvol);
+//			delete stock;
+//			delete stock1;
+//			delete stock2;
+//		}
+//	}
+//}
