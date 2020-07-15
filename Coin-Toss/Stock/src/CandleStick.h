@@ -20,6 +20,7 @@ namespace Stock {
 		CandleStick(int);
 		void setInterval(int); //maxPrice, minPrice, tickInterval
 		void updateCandleStick(float, float); //maxPrice, minPrice
+		~CandleStick();
 	protected:
 	};
 };

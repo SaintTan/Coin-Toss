@@ -41,3 +41,5 @@ void Stock::CandleStick::updateCandleStick(float max_price, float min_price) {
 	cs_tickTime++;
 	return;
 };
+
+Stock::CandleStick::~CandleStick() {}
