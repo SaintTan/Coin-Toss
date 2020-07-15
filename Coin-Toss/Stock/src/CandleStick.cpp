@@ -15,6 +15,9 @@ char Stock::IDManagement::getNewID() {
 Stock::CandleStick::CandleStick() :cs_maxPrice(0), cs_minPrice(0), cs_openPrice(0), cs_closePrice(0),
 cs_tickInterval(0), cs_tickTime(0), cs_candleID(IDManagement::getNewID()) {}
 
+Stock::CandleStick::CandleStick(int interval) : cs_maxPrice(0), cs_minPrice(0), cs_openPrice(0), cs_closePrice(0),
+cs_tickInterval(interval), cs_tickTime(0), cs_candleID(IDManagement::getNewID()) {}
+
 void Stock::CandleStick::setInterval(int tickInterval){
 	cs_tickInterval = tickInterval;
 };
