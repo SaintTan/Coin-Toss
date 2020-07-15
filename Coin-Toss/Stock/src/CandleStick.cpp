@@ -15,12 +15,8 @@ char Stock::IDManagement::getNewID() {
 Stock::CandleStick::CandleStick() :cs_maxPrice(0), cs_minPrice(0), cs_openPrice(0), cs_closePrice(0),
 cs_tickInterval(0), cs_tickTime(0), cs_candleID(IDManagement::getNewID()) {}
 
-Stock::CandleStick::CandleStick(int interval) : cs_maxPrice(0), cs_minPrice(0), cs_openPrice(0), cs_closePrice(0),
+Stock::CandleStick::CandleStick(float max_price, float min_price,int interval) : cs_maxPrice(max_price), cs_minPrice(min_price), cs_openPrice(0), cs_closePrice(max_price),
 cs_tickInterval(interval), cs_tickTime(0), cs_candleID(IDManagement::getNewID()) {}
-
-void Stock::CandleStick::setInterval(int tickInterval){
-	cs_tickInterval = tickInterval;
-};
 
 void Stock::CandleStick::updateCandleStick(float max_price, float min_price) {
 	if (cs_tickTime > cs_tickInterval) {

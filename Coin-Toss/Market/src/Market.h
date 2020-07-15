@@ -4,11 +4,11 @@
 #include <array>
 
 namespace Market {
-	template <size_t size, size_t size_s, size_t size_cs>
+	template <size_t size, size_t size_s>
 	class Market {
 	private:
 		std::string marketID;
-		std::array<Stock::Stock<size_s, size_cs>, size> stocks;
+		std::array<Stock::Stock<size_s>, size> stocks;
 	public:
 		Market();
 		void updateStock();

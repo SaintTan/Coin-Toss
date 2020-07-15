@@ -6,7 +6,7 @@ Stock::StockRecord<size>::StockRecord()
 
 template <size_t size>
 void Stock::StockRecord<size>::updateStockRecord(MarketQue<size>& topPrevPrices) {
-	sr_topPrevPrices = *topPrevPrices;
+	sr_topPrevPrices = topPrevPrices;
 }
 
 template<size_t size>

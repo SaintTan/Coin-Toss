@@ -17,8 +17,7 @@ namespace Stock {
 		int cs_tickInterval;
 	public:
 		CandleStick();
-		CandleStick(int);
-		void setInterval(int); //maxPrice, minPrice, tickInterval
+		CandleStick(float, float , int); //maxPrice, minPrice, tickInterval
 		void updateCandleStick(float, float); //maxPrice, minPrice
 		~CandleStick();
 	protected:

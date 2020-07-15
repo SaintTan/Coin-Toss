@@ -1,6 +1,5 @@
 #pragma once
 #include "MarketQue.h"
-#include <array>
 
 namespace Stock {
 	template <size_t size>

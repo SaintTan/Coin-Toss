@@ -1,10 +1,19 @@
 #pragma once
-#include <array>
+#include <vector>
 
 namespace Stock{
 	template<size_t size>
 	struct MarketQue {
-		std::array<float, size> s_topPrice_B, s_topPrice_S;
-		std::array<unsigned int, size> s_topVol_B, s_topVol_S;
+	private:
+	public:
+		std::vector<float> mq_topPrice_B, mq_topPrice_S;
+		std::vector<unsigned int> mq_topVol_B, mq_topVol_S;
+		MarketQue() {
+			mq_topPrice_B.reserve(size);
+			mq_topPrice_S.reserve(size);
+			mq_topVol_B.reserve(size);
+			mq_topVol_S.reserve(size);
+		}
+	protected:
 	};
 }
