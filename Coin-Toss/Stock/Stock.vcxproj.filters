@@ -35,5 +35,8 @@
     <ClInclude Include="src\StockRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\MarketQue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -149,6 +149,7 @@
     <ClInclude Include="src\CandleStick.h" />
     <ClInclude Include="src\Stock.h" />
     <ClInclude Include="src\StockRecord.h" />
+    <ClInclude Include="src\MarketQue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

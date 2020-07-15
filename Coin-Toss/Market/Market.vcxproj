@@ -144,11 +144,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="src\Market.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Stock\Stock.vcxproj">
       <Project>{814a065f-b91e-4d7d-a97b-a2e96650fc74}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Market.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
