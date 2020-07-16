@@ -15,5 +15,4 @@ namespace Stock{
 			mq_topVol_S.reserve(size);
 		}
 	protected:
-	};
 }
