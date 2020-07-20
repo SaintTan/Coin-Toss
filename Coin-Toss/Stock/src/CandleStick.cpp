@@ -1,5 +1,4 @@
 #include "CandleStick.h"
-#include <iostream>
 
 static const int ID = 97;
 

@@ -2,13 +2,12 @@
 #include "MarketQue.h"
 
 namespace Stock {
-	template <size_t size>
 	class StockRecord {
 	private:
-		MarketQue<size> sr_topPrevPrices;
+		MarketQue sr_topPrevPrices;
 	public:
-		StockRecord(); //cs_Interval
-		void updateStockRecord(MarketQue<size>& topPrev_prices);
+		StockRecord(int cs_size); //cs_Interval
+		void updateStockRecord(MarketQue& topPrev_prices);
 		~StockRecord();
 	protected:
 	};

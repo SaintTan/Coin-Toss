@@ -1,13 +1,10 @@
 #include "StockRecord.h"
 
-template <size_t size>
-Stock::StockRecord<size>::StockRecord()
-	:sr_topPrevPrices(MarketQue<size>{}) {};
+Stock::StockRecord::StockRecord(int cs_size)
+	:sr_topPrevPrices(MarketQue(cs_size)) {};
 
-template <size_t size>
-void Stock::StockRecord<size>::updateStockRecord(MarketQue<size>& topPrevPrices) {
+void Stock::StockRecord::updateStockRecord(MarketQue& topPrevPrices) {
 	sr_topPrevPrices = topPrevPrices;
 }
 
-template<size_t size>
-Stock::StockRecord<size>::~StockRecord() {};
+Stock::StockRecord::~StockRecord() {};

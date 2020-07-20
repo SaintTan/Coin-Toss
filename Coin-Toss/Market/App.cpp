@@ -6,7 +6,7 @@
 
 int main() {
 	const std::string stockID = "001";
-	Stock::MarketQue<3> topPrices;
+	Stock::MarketQue topPrices(3);
 	std::vector<float> topCurPrice_B = { 3,2,1 };
 	std::vector<float> topCurPrice_S = { 4,5,6 };
 	topPrices.mq_topPrice_B = topCurPrice_B;
@@ -17,10 +17,9 @@ int main() {
 	topPrices.mq_topVol_S = topCurVol_S;
 	std::vector<unsigned int> cs_Interval = { 100,300,1000 };
 	unsigned int totalVol= 3+2+1+4+5+6;
-	Stock::Stock<3> first_stock(stockID, topPrices, cs_Interval, totalVol);
+	Stock::Stock first_stock(stockID, topPrices, cs_Interval, totalVol);
 	totalVol = 100;
 	first_stock.updateStock(totalVol);
-	Stock::MarketQue<3> update;
 
 	topCurPrice_B = { 13,12,11 };
 	topCurPrice_S = { 14,15,16 };
