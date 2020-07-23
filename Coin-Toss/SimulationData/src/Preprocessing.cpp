@@ -15,10 +15,7 @@ static void getFiles(const wchar_t& filename, const wchar_t& relative_path) {
 	else {
 		wchar_t savefileDir[BUFFSIZE];
 		wcscpy_s(savefileDir, currentDir);
-		std::wcout << savefileDir << "\n" << std::endl;
 		wcscat_s(savefileDir, &filename);
-
-		std::wcout << savefileDir << "\n" << std::endl;
 
 		wcscat_s(currentDir, &relative_path);
 		wchar_t fullFiles[2] = { '\\', '*' };
@@ -33,9 +30,7 @@ static void getFiles(const wchar_t& filename, const wchar_t& relative_path) {
 
 		WIN32_FIND_DATA data;
 		HANDLE hFind;*/
+		delete[] savefileDir;
 	}
-
-
-
 	delete[] currentDir;
 }
