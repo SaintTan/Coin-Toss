@@ -1,14 +1,13 @@
 #include "SimulationData.h"
 
-static std::wstring convert_To_Wstring(const std::string&);
+#define BUFFSIZE MAX_PATH
 
-SimulationData::SimulationData::SimulationData(const std::string& pathDir) : sd_pathDir(pathDir), sd_filenum(0) {
-    sd_filenum = getFileAmount();
+SimulationData::SimulationData::SimulationData() : sd_filenum(0) {
 };
 
 unsigned int SimulationData::SimulationData::getFileAmount() {
     unsigned int amount = 0;
-    std::string currentDir(GetCurrentDirectory()
+
     return amount;
 }
 
