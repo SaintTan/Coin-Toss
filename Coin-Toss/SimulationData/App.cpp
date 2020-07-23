@@ -1,5 +1,7 @@
-#include "src/SimulationData.h"
+#include "src/Preprocessing.cpp"
 
 int main() {
-	SimulationData::SimulationData currentDir("");
+	wchar_t addon[10] = L"\\..\\..";
+	wchar_t filename[10] = L"\\..\\data";
+	getFiles(*filename, *addon);
 }

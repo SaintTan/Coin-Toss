@@ -5,8 +5,6 @@
 namespace SimulationData{
 	class SimulationData {
 	private:
-		unsigned int getFileAmount();
-		void getFileNames();
 	public:
 		SimulationData();
 	protected:

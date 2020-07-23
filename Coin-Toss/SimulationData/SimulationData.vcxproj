@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="src\Preprocessing.cpp" />
     <ClCompile Include="src\SimulationData.cpp" />
   </ItemGroup>
   <ItemGroup>
