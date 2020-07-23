@@ -8,9 +8,8 @@ namespace SimulationData{
 		unsigned int getFileAmount();
 		void getFileNames();
 	public:
-		SimulationData(const std::string& pathDir);
+		SimulationData();
 	protected:
-		std::string sd_pathDir;
 		std::vector<std::string> sd_filenames;
 		unsigned int sd_filenum;
 	};
