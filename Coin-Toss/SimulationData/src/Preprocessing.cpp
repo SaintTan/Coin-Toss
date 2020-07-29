@@ -1,10 +1,10 @@
 #include "Preprocessing.h"
 
-static void getFilesLoc(std::vector<std::wstring>& const fileLocNames) {
+static void getFilesLoc(const std::wstring& source, std::vector<std::wstring>& const fileLocNames) {
     LPTSTR buffer = new TCHAR[BUFFSIZE];
     getCurrentLoc(buffer);
     std::wstring datasource(buffer);
-    datasource.append(L"\\data\\datasource.txt");
+    datasource.append(L"\\data\\").append(source);
     fileLocNames.reserve(readInLocFilesNum(datasource));
     readInLocFilesEntry(datasource, fileLocNames);
     delete[] buffer;
@@ -36,9 +36,9 @@ static void readInLocFilesEntry(const std::wstring& fileLocName, std::vector<std
     return;
 }
 
-void getDataFiles(std::vector<std::ifstream>& filenames) {
+void getDataFiles(const std::wstring& source, std::vector<std::ifstream>& filenames) {
     std::vector<std::wstring> fileLocNames;
-    getFilesLoc(fileLocNames);
+    getFilesLoc(source, fileLocNames);
     for (std::vector < std::wstring>::iterator it = fileLocNames.begin(); it != fileLocNames.end(); ++it) {
         filenames.reserve(getDataNum(*it));
     }

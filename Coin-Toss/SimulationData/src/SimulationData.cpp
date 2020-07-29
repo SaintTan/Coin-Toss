@@ -1,8 +1,7 @@
 #include "SimulationData.h"
 
-#define BUFFSIZE MAX_PATH
+SimulationData::SimulationData::SimulationData(std::vector<Stock::Stock>& const stocks) : sd_filenum(0) {
 
-SimulationData::SimulationData::SimulationData() : sd_filenum(0) {
 };
 
 

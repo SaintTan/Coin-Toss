@@ -18,9 +18,6 @@
     <ClCompile Include="src\SimulationData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Preprocessing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -34,6 +31,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data\datasource.txt" />
+    <Text Include="data\StockQue_source.txt" />
   </ItemGroup>
 </Project>
