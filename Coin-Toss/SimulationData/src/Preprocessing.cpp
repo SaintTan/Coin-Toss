@@ -1,22 +1,5 @@
 #include "Preprocessing.h"
 
-static void getData(const std::wstring& fileLoc, std::vector<std::wstring>& const filenames) {
-    
-}
-
-static int getDataNum(const std::wstring& fileLoc) {
-    int numEntry = 0;
-    WIN32_FIND_DATA data;
-    HANDLE hFind;
-    if ((hFind = FindFirstFile(fileLoc.c_str(), &data)) != INVALID_HANDLE_VALUE) {
-        do {
-            numEntry++;
-        } while (FindNextFile(hFind, &data) != 0);
-        FindClose(hFind);
-    }
-    return numEntry;
-}
-
 static void getFilesLoc(std::vector<std::wstring>& const fileLocNames) {
     LPTSTR buffer = new TCHAR[BUFFSIZE];
     getCurrentLoc(buffer);
@@ -32,9 +15,7 @@ static int readInLocFilesNum(const std::wstring& fileLocName) {
     int numEntry = 0;
     std::wstring line;
     std::wifstream file;
-    std::wcout << fileLocName << std::endl;
     file.open(fileLocName);
-    std::cout << file.is_open() << std::endl;
     if (file.is_open()) {
         while (std::getline(file, line)) {
             numEntry++;
@@ -46,15 +27,56 @@ static int readInLocFilesNum(const std::wstring& fileLocName) {
 static void readInLocFilesEntry(const std::wstring& fileLocName, std::vector<std::wstring>& fileLocNames) {
     std::wstring line;
     std::wifstream file;
-    std::wcout << fileLocName << std::endl;
     file.open(fileLocName);
-    std::cout << file.is_open() << std::endl;
     if (file.is_open()) {
         while (std::getline(file, line)) {
             fileLocNames.emplace_back(line.append(L"\\*"));
         }
     }
     return;
+}
+
+void getDataFiles(std::vector<std::ifstream>& filenames) {
+    std::vector<std::wstring> fileLocNames;
+    getFilesLoc(fileLocNames);
+    for (std::vector < std::wstring>::iterator it = fileLocNames.begin(); it != fileLocNames.end(); ++it) {
+        filenames.reserve(getDataNum(*it));
+    }
+    for (std::vector < std::wstring>::iterator it = fileLocNames.begin(); it != fileLocNames.end(); ++it) {
+        getDataFilesEntry(*it, filenames);
+    }
+    return;
+}
+
+static int getDataNum(const std::wstring& fileLoc) {
+    int numEntry = 0;
+    WIN32_FIND_DATA data;
+    HANDLE hFind;
+    if ((hFind = FindFirstFile(fileLoc.c_str(), &data)) != INVALID_HANDLE_VALUE) {
+        do {
+            numEntry++;
+        } while (FindNextFile(hFind, &data) != 0);
+        FindClose(hFind);
+    }
+    return numEntry-2;
+}
+
+static void getDataFilesEntry(const std::wstring& fileLoc, std::vector<std::ifstream>& datastream) {
+    int removeDots = 0;
+    WIN32_FIND_DATA data;
+    HANDLE hFind;
+    if ((hFind = FindFirstFile(fileLoc.c_str(), &data)) != INVALID_HANDLE_VALUE) {
+        do {
+            if (removeDots<2) {
+                removeDots++;
+                continue;
+            }
+            std::wstring fileDestination(fileLoc);
+            fileDestination.pop_back();
+            datastream.emplace_back(std::ifstream(fileDestination.append(data.cFileName)));
+        } while (FindNextFile(hFind, &data) != 0);
+        FindClose(hFind);
+    }
 }
 
 static bool getCurrentLoc(const LPTSTR& buffer) {
