@@ -24,7 +24,11 @@
     <ClCompile Include="src\SimulationData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Preprocessing.h" />
     <ClInclude Include="src\SimulationData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\datasource.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

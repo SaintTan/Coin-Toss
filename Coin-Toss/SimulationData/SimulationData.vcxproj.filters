@@ -29,5 +29,11 @@
     <ClInclude Include="src\SimulationData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Preprocessing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\datasource.txt" />
   </ItemGroup>
 </Project>
