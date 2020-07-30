@@ -20,14 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Preprocessing.cpp" />
-    <ClCompile Include="src\SimulationData.cpp" />
+    <ClCompile Include="src\Data.cpp" />
+    <ClCompile Include="src\QueData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Preprocessing.h" />
-    <ClInclude Include="src\SimulationData.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="data\StockQue_source.txt" />
+    <ClInclude Include="src\Data.h" />
+    <ClInclude Include="src\QueData.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Stock\Stock.vcxproj">
@@ -40,6 +39,7 @@
     <ProjectGuid>{e575eb73-6c02-47a2-ab00-0e75704aeead}</ProjectGuid>
     <RootNamespace>SimulationData</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Data</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

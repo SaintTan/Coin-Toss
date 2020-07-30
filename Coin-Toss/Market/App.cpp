@@ -1,10 +1,7 @@
-#include "Stock.h"
-#include "SimulationData.h"
-#include "StockQue.h"
-#include <string>
-#include <array>
-#include <vector>
+#include "QueData.h"
+#include <iostream>
 
 int main() {
-	SimulationData::SimulationData mySim();
+	Data::QueData quedata;
+
 }

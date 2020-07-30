@@ -13,4 +13,5 @@ static void readInLocFilesEntry(const std::wstring&, std::vector<std::wstring>&)
 void getDataFiles(const std::wstring&, std::vector<std::ifstream>&);
 static int getDataNum(const std::wstring&);
 static void getDataFilesEntry(const std::wstring&, std::vector<std::ifstream>&);
+void getDataFilesName(const std::wstring& fileLoc, std::vector<std::wstring>& filenames);
 static bool getCurrentLoc(const LPTSTR&);
