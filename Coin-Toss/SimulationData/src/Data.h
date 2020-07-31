@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Stock.h"
-#include "Preprocessing.h"
+#include "Preprocess.h"
 #include <string>
 #include <vector>
 
@@ -12,7 +12,9 @@ namespace Data{
 	public:
 	protected:
 		Data(const std::wstring&);
+		void getDataNames(const std::wstring& source, std::vector<std::wstring>& filenames);
 		void getData(unsigned int, std::string& const);
+
 	};
 }
 

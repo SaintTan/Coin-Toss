@@ -1,7 +1,6 @@
-#include "QueData.h"
+#include "DataManager.h"
 #include <iostream>
 
 int main() {
-	Data::QueData quedata;
-
+	Data::DataManager datamanager;
 }
