@@ -1,6 +1,8 @@
 #include "DataManager.h"
+#include "Stock.h"
 #include <iostream>
 
 int main() {
-	Data::DataManager datamanager;
+	std::vector<Stock::Stock> stocks;
+	Data::DataManager datamanager(stocks);
 }

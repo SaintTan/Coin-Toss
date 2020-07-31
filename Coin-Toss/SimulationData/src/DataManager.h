@@ -7,10 +7,11 @@
 namespace Data {
 	class DataManager {
 	private:
-		std::vector<Stock::Stock> dm_stocks;
+		std::vector<Stock::StockQue> dm_stockques;
 		QueData dm_quedata;
+		unsigned int dm_stocksize;
 	public:
-		DataManager();
+		DataManager(std::vector<Stock::Stock>&);
 		~DataManager();
 	protected:
 	};
