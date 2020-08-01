@@ -19,21 +19,26 @@ Data::DataManager::DataManager(std::vector<Stock::Stock>& stocks):dm_quedata(Que
 
 	for (unsigned int i = 0; i < dm_stocksize; i++) {
 		std::string str(stock_ids[i].begin(), stock_ids[i].end());
-		stocks.emplace_back(Stock::Stock(str, dm_stockques[i], intervals));
+		stocks.emplace_back(Stock::Stock(str, dm_stockques[i], intervals, getTotalVol(dm_stockques[i])));
 	}
 	return;
 }
 
 void Data::DataManager::updateData(std::vector<Stock::Stock>& const stocks){
-	for (auto it = stocks.begin(); it != stocks.end(); it++) {
-		it->updateStock();
-	}
 	for (unsigned int i = 0; i < dm_stocksize; i++) {
+		stocks[i].updateStockQue(getTotalVol(dm_stockques[i]));
 		dm_quedata.updateData(i, dm_stockques[i]);
 	}
 	return;
 }
 
 
-
 Data::DataManager::~DataManager(){}
+
+static unsigned int getTotalVol(const Stock::StockQue& stockque) {
+	unsigned int totalVol = 0;
+	for (unsigned int i = 0; i < stockque.mq_size; i++) {
+		totalVol += stockque.mq_topVol_B[i] + stockque.mq_topVol_S[i];
+	}
+	return totalVol;
+}

@@ -4,6 +4,8 @@
 #include "Preprocess.h"
 #include <vector>
 
+static unsigned int getTotalVol(const Stock::StockQue& stockque);
+
 namespace Data {
 	class DataManager {
 	private:
