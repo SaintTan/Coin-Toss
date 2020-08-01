@@ -1,8 +1,8 @@
 #pragma once
 #include "QueData.h"
 #include "Stock.h"
+#include "Preprocess.h"
 #include <vector>
-#include <iostream>
 
 namespace Data {
 	class DataManager {
@@ -12,6 +12,7 @@ namespace Data {
 		unsigned int dm_stocksize;
 	public:
 		DataManager(std::vector<Stock::Stock>&);
+		void updateData(std::vector<Stock::Stock>& const stocks);
 		~DataManager();
 	protected:
 	};

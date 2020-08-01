@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\StockQue_source.txt" />
+    <Text Include="data\TimeIntervals.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,12 +11,30 @@ void Data::QueData::getFileNames(std::vector<std::wstring>& filenames) {
 void Data::QueData::initializeData(unsigned int i, Stock::StockQue& const stockque) {
 	std::string string;
 	this->getData(i, string);
+	if (string == "") {
+		for (unsigned int i = 0; i < stockque.mq_size; i++) {
+			stockque.mq_topPrice_B.emplace_back(0.0f);
+			stockque.mq_topPrice_S.emplace_back(0.0f);
+			stockque.mq_topVol_B.emplace_back(0);
+			stockque.mq_topVol_S.emplace_back(0);
+			return;
+		}
+	}
 	iniprocess_data(string, stockque);
 }
 
 void Data::QueData::updateData(unsigned int i, Stock::StockQue& const stockque) {
 	std::string string;
 	this->getData(i, string);
+	if (string == "") {
+		for (unsigned int i = 0; i < stockque.mq_size; i++) {
+			stockque.mq_topPrice_B[i] = 0;
+			stockque.mq_topPrice_S[i] = 0;
+			stockque.mq_topVol_B[i] = 0;
+			stockque.mq_topVol_S[i] = 0;
+			return;
+		}
+	}
 	process_data(string, stockque);
 }
 
@@ -28,9 +46,6 @@ void Data::QueData::process_data(const std::string& string, Stock::StockQue& con
 		tempNum = tempString.find(',');
 		tempStr = tempString.substr(0, tempNum);
 		tempString += tempNum;
-		if (!stockque.mq_topPrice_B[i]) {
-			stockque.mq_topPrice_B.emplace_back(std::stof(tempStr));
-		}
 		stockque.mq_topPrice_B[i]=std::stof(tempStr);
 		tempNum = tempString.find(',');
 		tempStr = tempString.substr(0, tempNum);

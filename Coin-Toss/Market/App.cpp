@@ -5,4 +5,8 @@
 int main() {
 	std::vector<Stock::Stock> stocks;
 	Data::DataManager datamanager(stocks);
+	for (int i = 0; i < 50; i++) {
+		datamanager.updateData(stocks);
+	}
+	
 }

@@ -29,5 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\StockQue_source.txt" />
+    <Text Include="data\TimeIntervals.txt" />
   </ItemGroup>
 </Project>

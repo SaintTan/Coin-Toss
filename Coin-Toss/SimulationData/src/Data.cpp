@@ -10,6 +10,15 @@ void Data::Data::getDataNames(const std::wstring& source, std::vector<std::wstri
 
 void Data::Data::getData(unsigned int i, std::string& const string) {
 	std::getline(sd_datastream[i], string);
+	if (sd_datastream[i].bad()) {
+		string = "";
+	}
+	else if (sd_datastream[i].eof()) {
+		string = "";
+	}
+	else {
+		return;
+	}
 }
 
 
