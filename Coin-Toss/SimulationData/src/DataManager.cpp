@@ -9,7 +9,13 @@ Data::DataManager::DataManager(std::vector<Stock::Stock>& stocks):dm_quedata(Que
 	dm_stockques.reserve(dm_stocksize);
 	for (unsigned int i = 0; i < dm_stocksize; i++) {
 		dm_stockques.emplace_back(Stock::StockQue(3));
-		dm_quedata.initializeData(i, dm_stockques[i]);
+		for (unsigned int j = 0; j < dm_stockques[i].mq_size; j++) {
+			dm_stockques[i].mq_topPrice_B.emplace_back();
+			dm_stockques[i].mq_topPrice_S.emplace_back();
+			dm_stockques[i].mq_topVol_B.emplace_back();
+			dm_stockques[i].mq_topVol_S.emplace_back();
+		}
+		dm_quedata.updateData(i, dm_stockques[i]);
 	}
 	//get time intervals
 	std::vector<unsigned int> intervals = {1000,2500, 10000, 25000, 50000};

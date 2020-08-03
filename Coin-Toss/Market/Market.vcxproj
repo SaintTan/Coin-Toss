@@ -145,6 +145,8 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="src\Market.cpp" />
+    <ClCompile Include="src\TraderStockPage.cpp" />
+    <ClCompile Include="src\Trader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimulationData\SimulationData.vcxproj">
@@ -156,6 +158,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Market.h" />
+    <ClInclude Include="src\TraderStockPage.h" />
+    <ClInclude Include="src\Trader.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\StockQue_source.txt" />

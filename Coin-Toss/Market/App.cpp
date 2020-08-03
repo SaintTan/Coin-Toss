@@ -1,12 +1,8 @@
-#include "DataManager.h"
-#include "Stock.h"
+#include "src/Market.h"
 #include <iostream>
 
 int main() {
-	std::vector<Stock::Stock> stocks;
-	Data::DataManager datamanager(stocks);
-	for (int i = 0; i < 50; i++) {
-		datamanager.updateData(stocks);
-	}
+	Market::Market market("001");
+	market.updateStock();
 	
 }
