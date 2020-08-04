@@ -18,7 +18,7 @@ namespace Market {
 		unsigned int tsp_volLim;
 		Stock::Stock* tsp_stock;
 	public:
-		TraderStockPage(const Stock::Stock&, double, unsigned int);
+		TraderStockPage(Stock::Stock&, double, unsigned int);
 		Order executeStrat();
 		std::string getStockName();
 		Stock::Stock& getStock();
