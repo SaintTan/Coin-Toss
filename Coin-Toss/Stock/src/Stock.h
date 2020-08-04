@@ -17,6 +17,7 @@ namespace Stock {
 	public:
 		Stock(const std::string&, StockQue&, std::vector<unsigned int>&, unsigned int); //stockID, s_topCur, cs_interval, total_vol
 		void updateStockQue(unsigned int);
+		std::string get_stockID() const;
 		~Stock();
 	protected:
 	};

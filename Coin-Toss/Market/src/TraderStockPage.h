@@ -1,7 +1,16 @@
 #pragma once
 #include "Stock.h"
+#include <string>
 
 namespace Market {
+	struct Order {
+	private:
+	public:
+		std::string mode;
+		unsigned int volume;
+		float price;
+	protected:
+	};
 	class TraderStockPage {
 	private:
 		double tsp_currentBal;
@@ -10,7 +19,9 @@ namespace Market {
 		Stock::Stock* tsp_stock;
 	public:
 		TraderStockPage(const Stock::Stock&, double, unsigned int);
-		int executeStrat();
+		Order executeStrat();
+		std::string getStockName();
+		Stock::Stock& getStock();
 		bool errorHandling();
 		~TraderStockPage();
 	protected:

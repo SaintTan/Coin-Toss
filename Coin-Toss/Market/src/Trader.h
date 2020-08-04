@@ -7,10 +7,9 @@ namespace Market {
 	private:
 		double t_currentBal;
 		double t_profitLoss;
-		std::vector<TraderStockPage> t_astockpages;
+		std::vector<TraderStockPage> t_stockpages;
 	private:
-		bool sendBuyOrder(const Stock::Stock, unsigned int, float);
-		bool sendSellOrder(const Stock::Stock, unsigned int, float);
+		bool sendOrder(const Stock::Stock&, unsigned int, float);
 	public:
 		Trader(double, const std::vector<Stock::Stock>&);
 		void makeDecision();

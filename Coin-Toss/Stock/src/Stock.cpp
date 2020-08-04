@@ -16,6 +16,10 @@ void Stock::Stock::updateStockQue(unsigned int totalVol) {
 	}
 }
 
+std::string Stock::Stock::get_stockID() const {
+	return s_stockID;
+}
+
 
 
 Stock::Stock::~Stock() {};
