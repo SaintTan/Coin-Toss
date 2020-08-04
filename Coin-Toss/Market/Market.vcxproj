@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="src\Broker.cpp" />
     <ClCompile Include="src\Market.cpp" />
     <ClCompile Include="src\TraderStockPage.cpp" />
     <ClCompile Include="src\Trader.cpp" />
@@ -157,6 +158,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Broker.h" />
     <ClInclude Include="src\Market.h" />
     <ClInclude Include="src\TraderStockPage.h" />
     <ClInclude Include="src\Trader.h" />
