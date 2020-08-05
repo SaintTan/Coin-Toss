@@ -4,7 +4,7 @@ std::wstring Data::QueData::qd_location = L"StockQue_Source.txt";
 
 Data::QueData::QueData():Data(qd_location){}
 
-void Data::QueData::getFileNames(std::vector<std::wstring>& filenames) {
+void Data::QueData::getFileNames(std::vector<std::wstring>& filenames){
 	this->getDataNames(qd_location, filenames);
 }
 
@@ -23,7 +23,7 @@ void Data::QueData::updateData(unsigned int i, Stock::StockQue& stockque) {
 	process_data(string, stockque);
 }
 
-void Data::QueData::process_data(std::string& string, Stock::StockQue& stockque) {
+void Data::QueData::process_data(const std::string& string, Stock::StockQue& stockque) const {
 	std::string tempString = string;
 	std::size_t tempNum;
 	std::string tempStr;
@@ -49,7 +49,7 @@ void Data::QueData::process_data(std::string& string, Stock::StockQue& stockque)
 
 Data::QueData::~QueData() {}
 
-static unsigned int getQueRowNum(std::string& string) {
+static unsigned int getQueRowNum(const std::string& string) {
 	unsigned int rowNum = 0;
 	for (std::string::const_iterator it = string.begin(); it != string.end(); it++) {
 		if (*it == ';') {

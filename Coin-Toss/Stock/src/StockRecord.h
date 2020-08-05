@@ -6,8 +6,8 @@ namespace Stock {
 	private:
 		StockQue sr_topPrevPrices;
 	public:
-		StockRecord(int cs_size); //cs_Interval
-		void updateStockRecord(StockQue& topPrev_prices);
+		StockRecord(int); //cs_Interval
+		void updateStockRecord(StockQue&);
 		~StockRecord();
 	protected:
 	};

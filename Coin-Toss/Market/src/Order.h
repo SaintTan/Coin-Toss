@@ -10,7 +10,7 @@ namespace Market {
 		unsigned int o_volume;
 		float o_price;
 	public:
-		Order(std::string& mode, unsigned int volume, float price):o_orderID(0),o_mode(mode), o_volume(volume), o_price(price) {}
+		Order(const std::string& mode, unsigned int volume, float price):o_orderID(0),o_mode(mode), o_volume(volume), o_price(price) {}
 	protected:
 	};
 }

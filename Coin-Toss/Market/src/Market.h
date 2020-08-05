@@ -13,7 +13,7 @@ namespace Market {
 		Data::DataManager m_datamanager;
 		std::vector<Broker> m_brokers;
 	public:
-		Market(std::string&);
+		Market(const std::string&);
 		void updateStock();
 		~Market();
 	protected:

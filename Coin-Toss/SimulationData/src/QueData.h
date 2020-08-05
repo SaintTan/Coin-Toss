@@ -11,7 +11,7 @@ namespace Data {
 	class QueData : public Data {
 	private:
 		static std::wstring qd_location;
-		void process_data(std::string&, Stock::StockQue&);
+		void process_data(const std::string&, Stock::StockQue&) const;
 	public:
 		QueData();
 		void getFileNames(std::vector<std::wstring>&);

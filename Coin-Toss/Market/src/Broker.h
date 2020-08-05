@@ -10,7 +10,7 @@ namespace Market {
 		std::string b_brokerID;
 		std::vector<Trader> b_traders;
 	public:
-		Broker(std::string&, unsigned int, std::vector<Stock::Stock>&);
+		Broker(const std::string&, unsigned int, std::vector<Stock::Stock>&);
 		~Broker();
 	protected:
 	};

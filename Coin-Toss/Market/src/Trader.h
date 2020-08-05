@@ -15,7 +15,6 @@ namespace Market {
 	public:
 		Trader(std::vector<Stock::Stock>&, Broker&);
 		void makeDecision();
-		bool orderConfirm();
 		bool orderErrorHandling();
 		~Trader();
 	protected:
