@@ -4,21 +4,17 @@ Market::Trader::Trader(std::vector<Stock::Stock>& stocks,const Broker& broker): 
 	t_stockpages.reserve(stocks.size());
 	for (auto stock = stocks.begin(); stock != stocks.end(); stock++) {
 		unsigned int vol = 1000;
-		t_stockpages.emplace_back(TraderStockPage(*stock, t_currentBal/stocks.size(), vol));
+		t_stockpages.emplace_back(TraderStockPage(*stock, t_currentBal/stocks.size(), vol, *this));
 	}
 }
 
-bool Market::Trader::sendOrder(const Stock::Stock& stock, unsigned int volume, float price) {
+bool Market::Trader::sendOrder(const Stock::Stock& stock, unsigned int volume, float price) const {
 	return false;
 }
 
 void Market::Trader::makeDecision() {
-	Order* order;
 	for (auto stockpage = t_stockpages.begin(); stockpage != t_stockpages.end(); stockpage++) {
-		order = &stockpage->executeStrat();
-		if (order->o_mode != "null") {
-			sendOrder( stockpage->getStock(), order->o_volume, order->o_price);
-		}
+		stockpage->executeStrat();
 	}
 }
 

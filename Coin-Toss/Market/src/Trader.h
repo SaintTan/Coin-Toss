@@ -9,13 +9,10 @@ namespace Market {
 		double t_currentBal;
 		double t_profitLoss;
 		const Broker* t_broker;
-		std::vector<Order> t_sentOrders;
-		std::vector<Order> t_activeOrders;
 		std::vector<TraderStockPage> t_stockpages;
-	private:
-		bool sendOrder(const Stock::Stock&, unsigned int, float);
 	public:
 		Trader(std::vector<Stock::Stock>&, const Broker&);
+		bool sendOrder(const Stock::Stock&, unsigned int, float) const;
 		void makeDecision();
 		void orderConfirm(const Order& order);
 		bool orderErrorHandling();

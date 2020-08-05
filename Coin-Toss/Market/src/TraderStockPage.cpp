@@ -1,7 +1,8 @@
 #include "TraderStockPage.h"
+#include "Trader.h"
 
-Market::TraderStockPage::TraderStockPage(const Stock::Stock& stock, double totalBal, unsigned int volLim)
-	: tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_orderques(OrderQue(25)) {
+Market::TraderStockPage::TraderStockPage(Stock::Stock& stock, double totalBal, unsigned int volLim, const Trader& trader)
+	: tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(&trader), tsp_orderques(OrderQue(25)) {
 }
 
 double Market::TraderStockPage::calculateProfits(std::vector<Order>& buyQue, const Order& sold) {
@@ -9,7 +10,7 @@ double Market::TraderStockPage::calculateProfits(std::vector<Order>& buyQue, con
 	int remainingVol = sold.o_volume;
 	double profits = 0;
 	while (remainingVol > 0) {
-		if (buyQue.back().o_volume <= remainingVol) {
+		if ((int)buyQue.back().o_volume <= remainingVol) {
 			vol = buyQue.back().o_volume;
 			profits += ((double)buyQue.back().o_price * (double)vol) - ((double)sold.o_price * (double)vol);
 			remainingVol -= buyQue.back().o_volume;
@@ -26,8 +27,8 @@ double Market::TraderStockPage::calculateProfits(std::vector<Order>& buyQue, con
 
 }
 
-void Market::TraderStockPage::sendOrder() {
-
+void Market::TraderStockPage::sendOrder(unsigned int vol, float price) {
+	tsp_trader->sendOrder(*tsp_stock, vol, price);
 }
 
 
@@ -50,17 +51,17 @@ void Market::TraderStockPage::confirmOrder(const Order& order) {
 				break;
 			}
 		}
-		tsp_profitLoss = calculateProfits(tsp_orderques.oq_confirmBuys, order);
+		tsp_profitLoss += calculateProfits(tsp_orderques.oq_confirmBuys, order);
 		tsp_currentBal += (double)order.o_volume * (double)order.o_price;
 		tsp_volume -= order.o_volume;
 	}
 	return;
 }
 
-Market::Order Market::TraderStockPage::executeStrat() {
+void Market::TraderStockPage::executeStrat() {
 	std::string mode("null");
 	Market::Order order(*tsp_stock, tsp_orderNum++, mode, 0 ,0);
-	return order;
+	return;
 }
 
 bool Market::TraderStockPage::errorHandling() {
