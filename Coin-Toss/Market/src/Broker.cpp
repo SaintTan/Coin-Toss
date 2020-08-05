@@ -7,4 +7,8 @@ Market::Broker::Broker(const std::string& brokerID, unsigned int traderNum, std:
 	}
 }
 
+void Market::Broker::receiveOrder(const Stock::Stock& stock, unsigned int vol, float price) const {
+	
+}
+
 Market::Broker::~Broker() {}

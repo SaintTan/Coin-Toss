@@ -1,4 +1,5 @@
 #include "Trader.h"
+#include "Broker.h"
 
 Market::Trader::Trader(std::vector<Stock::Stock>& stocks,const Broker& broker): t_currentBal(100000), t_profitLoss(0), t_broker(&broker){
 	t_stockpages.reserve(stocks.size());
@@ -9,6 +10,7 @@ Market::Trader::Trader(std::vector<Stock::Stock>& stocks,const Broker& broker): 
 }
 
 bool Market::Trader::sendOrder(const Stock::Stock& stock, unsigned int volume, float price) const {
+	t_broker->receiveOrder(stock, volume, price);
 	return false;
 }
 
