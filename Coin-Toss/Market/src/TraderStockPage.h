@@ -1,7 +1,6 @@
 #pragma once
 #include "Stock.h"
 #include "Order.h"
-#include <vector>
 #include <string>
 
 namespace Market {
@@ -13,9 +12,10 @@ namespace Market {
 		double tsp_profitLoss;
 		unsigned int tsp_volLim;
 		unsigned int tsp_volume;
-		std::vector<Order> tsp_sentOrder;
-		std::vector<Order> tsp_activeOrder;
+		OrderQue tsp_orderques;
 		const Stock::Stock* tsp_stock;
+	private:
+		double calculateProfits(std::vector<Order>&, const Order&);
 	public:
 		TraderStockPage(const Stock::Stock&, double, unsigned int);
 		void sendOrder();
