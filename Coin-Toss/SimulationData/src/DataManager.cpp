@@ -24,13 +24,12 @@ Data::DataManager::DataManager(std::vector<Stock::Stock>& stocks):dm_quedata(Que
 	stocks.reserve(stock_ids.size());
 
 	for (unsigned int i = 0; i < dm_stocksize; i++) {
-		std::string str(stock_ids[i].begin(), stock_ids[i].end());
-		stocks.emplace_back(Stock::Stock(str, dm_stockques[i], intervals, getTotalVol(dm_stockques[i])));
+		stocks.emplace_back(Stock::Stock(stock_ids[i], dm_stockques[i], intervals, getTotalVol(dm_stockques[i])));
 	}
 	return;
 }
 
-void Data::DataManager::updateData(std::vector<Stock::Stock>& const stocks){
+void Data::DataManager::updateData(std::vector<Stock::Stock>& stocks){
 	for (unsigned int i = 0; i < dm_stocksize; i++) {
 		stocks[i].updateStockQue(getTotalVol(dm_stockques[i]));
 		dm_quedata.updateData(i, dm_stockques[i]);

@@ -1,6 +1,6 @@
 #include "Preprocess.h"
 
-static void getFilesLoc(const std::wstring& source, std::vector<std::wstring>& const fileLocNames) {
+static void getFilesLoc(const std::wstring& source, std::vector<std::wstring>& fileLocNames) {
     LPTSTR buffer = new TCHAR[BUFFSIZE];
     getCurrentLoc(buffer);
     std::wstring datasource(buffer);

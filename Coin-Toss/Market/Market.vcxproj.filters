@@ -44,6 +44,9 @@
     <ClInclude Include="src\Broker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Order.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\StockQue_source.txt" />

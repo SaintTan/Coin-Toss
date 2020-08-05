@@ -13,8 +13,9 @@ namespace Market {
 	private:
 		bool sendOrder(const Stock::Stock&, unsigned int, float);
 	public:
-		Trader(double, std::vector<Stock::Stock>&, Broker&);
+		Trader(std::vector<Stock::Stock>&, Broker&);
 		void makeDecision();
+		bool orderConfirm();
 		bool orderErrorHandling();
 		~Trader();
 	protected:

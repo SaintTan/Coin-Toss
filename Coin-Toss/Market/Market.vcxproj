@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="src\Broker.h" />
     <ClInclude Include="src\Market.h" />
+    <ClInclude Include="src\Order.h" />
     <ClInclude Include="src\TraderStockPage.h" />
     <ClInclude Include="src\Trader.h" />
   </ItemGroup>

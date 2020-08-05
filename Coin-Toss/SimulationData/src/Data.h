@@ -13,7 +13,7 @@ namespace Data{
 	protected:
 		Data(const std::wstring&);
 		void getDataNames(const std::wstring& source, std::vector<std::wstring>& filenames);
-		void getData(unsigned int, std::string& const);
+		void getData(unsigned int, std::string&);
 
 	};
 }

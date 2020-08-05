@@ -7,7 +7,7 @@
 
 #define BUFFSIZE MAX_PATH
 
-static void getFilesLoc(const std::wstring&, std::vector<std::wstring>& const);
+static void getFilesLoc(const std::wstring&, std::vector<std::wstring>&);
 static int readInLocFilesNum(const std::wstring&);
 static void readInLocFilesEntry(const std::wstring&, std::vector<std::wstring>&);
 void getDataFiles(const std::wstring&, std::vector<std::ifstream>&);

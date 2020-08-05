@@ -2,7 +2,8 @@
 #include <iostream>
 
 int main() {
-	Market::Market market("001");
+	std::string id = "001";
+	Market::Market market(id);
 	market.updateStock();
 	
 }

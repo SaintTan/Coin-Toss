@@ -1,6 +1,6 @@
 #include "Stock.h"
 
-Stock::Stock::Stock(const std::string& stockID, StockQue& topPrices, std::vector<unsigned int>& csInterval, unsigned int totalVol)
+Stock::Stock::Stock(const std::wstring& stockID, StockQue& topPrices, std::vector<unsigned int>& csInterval, unsigned int totalVol)
 	:s_stockID(stockID), s_topCur(&topPrices), s_stockRecord(StockRecord(topPrices.mq_size)), s_totalVol(totalVol) {
 	s_candleSticks.reserve(csInterval.size());
 	for (unsigned int i = 0; i < csInterval.size(); i++) {
@@ -16,7 +16,7 @@ void Stock::Stock::updateStockQue(unsigned int totalVol) {
 	}
 }
 
-std::string Stock::Stock::get_stockID() const {
+std::wstring Stock::Stock::get_stockID() const {
 	return s_stockID;
 }
 

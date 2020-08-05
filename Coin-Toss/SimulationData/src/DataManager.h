@@ -14,7 +14,7 @@ namespace Data {
 		unsigned int dm_stocksize;
 	public:
 		DataManager(std::vector<Stock::Stock>&);
-		void updateData(std::vector<Stock::Stock>& const stocks);
+		void updateData(std::vector<Stock::Stock>& stocks);
 		~DataManager();
 	protected:
 	};

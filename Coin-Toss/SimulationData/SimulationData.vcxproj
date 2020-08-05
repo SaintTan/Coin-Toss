@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DataRecord.cpp" />
     <ClCompile Include="src\DataManager.cpp" />
     <ClCompile Include="src\Preprocess.cpp" />
     <ClCompile Include="src\Data.cpp" />
     <ClCompile Include="src\QueData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DataRecord.h" />
     <ClInclude Include="src\DataManager.h" />
     <ClInclude Include="src\Preprocess.h" />
     <ClInclude Include="src\Data.h" />

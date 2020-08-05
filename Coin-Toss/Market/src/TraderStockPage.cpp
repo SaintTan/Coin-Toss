@@ -3,8 +3,8 @@
 Market::TraderStockPage::TraderStockPage(Stock::Stock& stock, double totalBal, unsigned int volLim): tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim) {}
 
 Market::Order Market::TraderStockPage::executeStrat() {
-	Market::Order order;
-	order.mode = "null";
+	std::string mode("null");
+	Market::Order order(mode, 0 ,0);
 	return order;
 }
 
@@ -12,7 +12,7 @@ bool Market::TraderStockPage::errorHandling() {
 	return false;
 }
 
-std::string Market::TraderStockPage::getStockName() {
+std::wstring Market::TraderStockPage::getStockName() {
 	return tsp_stock->get_stockID();
 }
 

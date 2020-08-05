@@ -5,17 +5,17 @@
 #include <fstream>
 #include <vector>
 
-static unsigned int getQueRowNum(const std::string& string);
+static unsigned int getQueRowNum(std::string& string);
 
 namespace Data {
 	class QueData : public Data {
 	private:
 		static std::wstring qd_location;
-		void process_data(const std::string&, Stock::StockQue& const);
+		void process_data(std::string&, Stock::StockQue&);
 	public:
 		QueData();
 		void getFileNames(std::vector<std::wstring>&);
-		void updateData(unsigned int, Stock::StockQue& const);
+		void updateData(unsigned int, Stock::StockQue&);
 		~QueData();
 	protected:
 	};
