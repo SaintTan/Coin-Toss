@@ -10,7 +10,6 @@ namespace Market {
 		double t_currentBal;
 		double t_profitLoss;
 		Broker* t_broker;
-		std::vector<TraderStockPage> t_updatepages;
 		std::vector<TraderStockPage*> t_stockpages;
 	public:
 		Trader(unsigned int, std::vector<Stock::Stock>&, Broker*);
