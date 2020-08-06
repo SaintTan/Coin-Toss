@@ -15,6 +15,7 @@ namespace Market {
 	public:
 		Market(const std::string&);
 		void updateStock();
+		void updateBroker();
 		~Market();
 	protected:
 	};

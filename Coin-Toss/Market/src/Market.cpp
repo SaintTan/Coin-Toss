@@ -8,6 +8,13 @@ Market::Market::Market(const std::string& marketID):m_marketID(marketID),m_stock
 
 void Market::Market::updateStock() {
 	m_datamanager.updateData(m_stocks);
+	updateBroker();
+}
+
+void Market::Market::updateBroker() {
+	for (auto broker = m_brokers.begin(); broker != m_brokers.end(); broker++) {
+		broker->receiveUpdate();
+	}
 }
 
 Market::Market::~Market() {}

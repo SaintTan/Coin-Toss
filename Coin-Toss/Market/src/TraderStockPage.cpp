@@ -28,13 +28,15 @@ double Market::TraderStockPage::calculateProfits(std::vector<Order>& buyQue, con
 }
 
 void Market::TraderStockPage::sendOrder(const Order& order) {
-	tsp_trader->sendOrder(order, *this);
 	if (order.o_mode == "buy") {
 		tsp_orderques.oq_sent_ordersB.emplace_back(order);
 	}
 	else if (order.o_mode == "sell") {
 		tsp_orderques.oq_sent_ordersS.emplace_back(order);
 	}
+	
+	tsp_trader->sendOrder(order, *this);
+	
 	return;
 }
 
@@ -66,8 +68,9 @@ void Market::TraderStockPage::confirmOrder(const Order& order) {
 }
 
 void Market::TraderStockPage::executeStrat() {
-	std::string mode("null");
+	std::string mode("buy");
 	Market::Order order(*tsp_stock, tsp_orderNum++, mode, 0 ,0);
+	sendOrder(order);
 	return;
 }
 

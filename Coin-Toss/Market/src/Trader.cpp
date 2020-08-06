@@ -1,7 +1,7 @@
 #include "Trader.h"
 #include "Broker.h"
 
-Market::Trader::Trader(std::vector<Stock::Stock>& stocks,const Broker& broker): t_currentBal(100000), t_profitLoss(0), t_broker(&broker){
+Market::Trader::Trader(unsigned int traderID, std::vector<Stock::Stock>& stocks, Broker& broker): t_traderID(traderID), t_currentBal(100000), t_profitLoss(0), t_broker(&broker){
 	t_stockpages.reserve(stocks.size());
 	t_updatepages.reserve(stocks.size());
 	for (auto stock = stocks.begin(); stock != stocks.end(); stock++) {
@@ -11,8 +11,10 @@ Market::Trader::Trader(std::vector<Stock::Stock>& stocks,const Broker& broker): 
 }
 
 bool Market::Trader::sendOrder(const Order& order, const TraderStockPage& stockPage) {
-	t_broker->receiveOrder(order);
+	std::cout << order.o_orderID << std::endl;
 	t_updatepages.emplace_back(stockPage);
+	std::cout << order.o_orderID << std::endl;
+	t_broker->receiveOrder(order, *this);
 	return false;
 }
 
@@ -40,6 +42,10 @@ void Market::Trader::orderConfirm(const Order& order) {
 
 bool Market::Trader::orderErrorHandling(){
 	return false;
+}
+
+bool Market::Trader::operator==(const Trader&trader) {
+	return this->t_traderID == trader.t_traderID;
 }
 
 Market::Trader::~Trader() {}

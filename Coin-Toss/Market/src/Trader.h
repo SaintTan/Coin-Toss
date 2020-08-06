@@ -6,17 +6,19 @@ namespace Market {
 	class Broker;
 	class Trader {
 	private:
+		unsigned int t_traderID;
 		double t_currentBal;
 		double t_profitLoss;
-		const Broker* t_broker;
+		Broker* t_broker;
 		std::vector<TraderStockPage> t_updatepages;
 		std::vector<TraderStockPage> t_stockpages;
 	public:
-		Trader(std::vector<Stock::Stock>&, const Broker&);
+		Trader(unsigned int, std::vector<Stock::Stock>&, Broker&);
 		bool sendOrder(const Order&, const TraderStockPage&);
 		void makeDecision();
 		void orderConfirm(const Order& order);
 		bool orderErrorHandling();
+		bool operator==(const Trader&);
 		~Trader();
 	protected:
 	};
