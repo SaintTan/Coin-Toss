@@ -15,41 +15,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp">
+    <ClCompile Include="src\QueData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Market.cpp">
+    <ClCompile Include="src\Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TraderStockPage.cpp">
+    <ClCompile Include="src\Preprocess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Trader.cpp">
+    <ClCompile Include="src\DataManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Broker.cpp">
+    <ClCompile Include="src\DataRecord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Market.h">
+    <ClInclude Include="src\QueData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TraderStockPage.h">
+    <ClInclude Include="src\Data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Trader.h">
+    <ClInclude Include="src\Preprocess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Broker.h">
+    <ClInclude Include="src\DataManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Order.h">
+    <ClInclude Include="src\DataRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="data\StockQue_source.txt" />
-    <Text Include="data\TimeIntervals.txt" />
   </ItemGroup>
 </Project>

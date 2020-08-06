@@ -18,22 +18,42 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\DataRecord.cpp" />
+    <ClCompile Include="src\DataManager.cpp" />
+    <ClCompile Include="src\Preprocess.cpp" />
+    <ClCompile Include="src\Data.cpp" />
+    <ClCompile Include="src\QueData.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\DataRecord.h" />
+    <ClInclude Include="src\DataManager.h" />
+    <ClInclude Include="src\Preprocess.h" />
+    <ClInclude Include="src\Data.h" />
+    <ClInclude Include="src\QueData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Stock\Stock.vcxproj">
+      <Project>{814a065f-b91e-4d7d-a97b-a2e96650fc74}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{acd054b6-9970-4eb0-bb42-a55269200648}</ProjectGuid>
-    <RootNamespace>Market</RootNamespace>
+    <ProjectGuid>{e575eb73-6c02-47a2-ab00-0e75704aeead}</ProjectGuid>
+    <RootNamespace>Data</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Data</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -88,12 +108,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Stock\src;$(SolutionDir)Data\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SDK Path\Include;$(SolutionDir)Stock\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -104,14 +123,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Stock\src;$(SolutionDir)Data\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SDK Path\Include;$(SolutionDir)Stock\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -142,32 +160,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="App.cpp" />
-    <ClCompile Include="src\Broker.cpp" />
-    <ClCompile Include="src\Market.cpp" />
-    <ClCompile Include="src\TraderStockPage.cpp" />
-    <ClCompile Include="src\Trader.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Data\Data.vcxproj">
-      <Project>{e575eb73-6c02-47a2-ab00-0e75704aeead}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Stock\Stock.vcxproj">
-      <Project>{814a065f-b91e-4d7d-a97b-a2e96650fc74}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Broker.h" />
-    <ClInclude Include="src\Market.h" />
-    <ClInclude Include="src\Order.h" />
-    <ClInclude Include="src\TraderStockPage.h" />
-    <ClInclude Include="src\Trader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="data\StockQue_source.txt" />
-    <Text Include="data\TimeIntervals.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
