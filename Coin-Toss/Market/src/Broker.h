@@ -11,7 +11,7 @@ namespace Market {
 		std::vector<Trader> b_traders;
 	public:
 		Broker(const std::string&, unsigned int, std::vector<Stock::Stock>&);
-		void receiveOrder(const Stock::Stock&, unsigned int vol, float price) const;
+		void receiveOrder(const Order&) const;
 		~Broker();
 	protected:
 	};

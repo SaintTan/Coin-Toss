@@ -13,16 +13,15 @@ namespace Market {
 		unsigned int tsp_volLim;
 		unsigned int tsp_volume;
 		OrderQue tsp_orderques;
-		const Trader* tsp_trader;
+		Trader* tsp_trader;
 		const Stock::Stock* tsp_stock;
 	private:
 		double calculateProfits(std::vector<Order>&, const Order&);
 	public:
-		TraderStockPage(const Stock::Stock&, double, unsigned int, const Trader&);
-		void sendOrder(unsigned int, float);
+		TraderStockPage(const Stock::Stock&, double, unsigned int, Trader&);
+		void sendOrder(const Order&);
 		void confirmOrder(const Order&);
 		void executeStrat();
-		std::wstring getStockName();
 		const Stock::Stock& getStock();
 		bool errorHandling();
 		~TraderStockPage();

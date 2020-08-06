@@ -1,7 +1,7 @@
 #include "TraderStockPage.h"
 #include "Trader.h"
 
-Market::TraderStockPage::TraderStockPage(const Stock::Stock& stock, double totalBal, unsigned int volLim, const Trader& trader)
+Market::TraderStockPage::TraderStockPage(const Stock::Stock& stock, double totalBal, unsigned int volLim, Trader& trader)
 	: tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(&trader), tsp_orderques(OrderQue(25)) {
 }
 
@@ -27,8 +27,15 @@ double Market::TraderStockPage::calculateProfits(std::vector<Order>& buyQue, con
 
 }
 
-void Market::TraderStockPage::sendOrder(unsigned int vol, float price) {
-	tsp_trader->sendOrder(*tsp_stock, vol, price);
+void Market::TraderStockPage::sendOrder(const Order& order) {
+	tsp_trader->sendOrder(order, *this);
+	if (order.o_mode == "buy") {
+		tsp_orderques.oq_sent_ordersB.emplace_back(order);
+	}
+	else if (order.o_mode == "sell") {
+		tsp_orderques.oq_sent_ordersS.emplace_back(order);
+	}
+	return;
 }
 
 
@@ -66,10 +73,6 @@ void Market::TraderStockPage::executeStrat() {
 
 bool Market::TraderStockPage::errorHandling() {
 	return false;
-}
-
-std::wstring Market::TraderStockPage::getStockName() {
-	return tsp_stock->get_stockID();
 }
 
 const Stock::Stock& Market::TraderStockPage::getStock() {
