@@ -11,14 +11,15 @@ namespace Market {
 		double t_profitLoss;
 		Broker* t_broker;
 		std::vector<TraderStockPage> t_updatepages;
-		std::vector<TraderStockPage> t_stockpages;
+		std::vector<TraderStockPage*> t_stockpages;
 	public:
-		Trader(unsigned int, std::vector<Stock::Stock>&, Broker&);
+		Trader(unsigned int, std::vector<Stock::Stock>&, Broker*);
 		bool sendOrder(const Order&, const TraderStockPage&);
 		void makeDecision();
 		void orderConfirm(const Order& order);
 		bool orderErrorHandling();
-		bool operator==(const Trader&);
+		unsigned int getID() const;
+		bool operator==(const Trader&) const;
 		~Trader();
 	protected:
 	};

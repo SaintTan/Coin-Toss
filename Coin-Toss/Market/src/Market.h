@@ -11,7 +11,7 @@ namespace Market {
 		std::string m_marketID;
 		std::vector<Stock::Stock> m_stocks;
 		Data::DataManager m_datamanager;
-		std::vector<Broker> m_brokers;
+		std::vector<Broker*> m_brokers;
 	public:
 		Market(const std::string&);
 		void updateStock();

@@ -19,7 +19,7 @@ namespace Market {
 	private:
 		double calculateProfits(std::vector<Order>&, const Order&);
 	public:
-		TraderStockPage(const Stock::Stock&, double, unsigned int, Trader&);
+		TraderStockPage(const Stock::Stock&, double, unsigned int, Trader*);
 		void sendOrder(const Order&);
 		void confirmOrder(const Order&);
 		void executeStrat();

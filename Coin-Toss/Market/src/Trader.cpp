@@ -1,26 +1,24 @@
 #include "Trader.h"
 #include "Broker.h"
 
-Market::Trader::Trader(unsigned int traderID, std::vector<Stock::Stock>& stocks, Broker& broker): t_traderID(traderID), t_currentBal(100000), t_profitLoss(0), t_broker(&broker){
+Market::Trader::Trader(unsigned int traderID, std::vector<Stock::Stock>& stocks, Broker* broker): t_traderID(traderID), t_currentBal(100000), t_profitLoss(0), t_broker(broker){
 	t_stockpages.reserve(stocks.size());
 	t_updatepages.reserve(stocks.size());
 	for (auto stock = stocks.begin(); stock != stocks.end(); stock++) {
 		unsigned int vol = 1000;
-		t_stockpages.emplace_back(TraderStockPage(*stock, t_currentBal/stocks.size(), vol, *this));
+		t_stockpages.emplace_back(new TraderStockPage(*stock, t_currentBal/stocks.size(), vol, this));
 	}
 }
 
 bool Market::Trader::sendOrder(const Order& order, const TraderStockPage& stockPage) {
-	std::cout << order.o_orderID << std::endl;
 	t_updatepages.emplace_back(stockPage);
-	std::cout << order.o_orderID << std::endl;
 	t_broker->receiveOrder(order, *this);
 	return false;
 }
 
 void Market::Trader::makeDecision() {
 	for (auto stockpage = t_stockpages.begin(); stockpage != t_stockpages.end(); stockpage++) {
-		stockpage->executeStrat();
+		(*stockpage)->executeStrat();
 	}
 }
 
@@ -44,7 +42,11 @@ bool Market::Trader::orderErrorHandling(){
 	return false;
 }
 
-bool Market::Trader::operator==(const Trader&trader) {
+unsigned int Market::Trader::getID() const{
+	return t_traderID;
+}
+
+bool Market::Trader::operator==(const Trader&trader) const {
 	return this->t_traderID == trader.t_traderID;
 }
 

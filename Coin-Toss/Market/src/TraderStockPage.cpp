@@ -1,8 +1,8 @@
 #include "TraderStockPage.h"
 #include "Trader.h"
 
-Market::TraderStockPage::TraderStockPage(const Stock::Stock& stock, double totalBal, unsigned int volLim, Trader& trader)
-	: tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(&trader), tsp_orderques(OrderQue(25)) {
+Market::TraderStockPage::TraderStockPage(const Stock::Stock& stock, double totalBal, unsigned int volLim, Trader* trader)
+	: tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(trader), tsp_orderques(OrderQue(25)) {
 }
 
 double Market::TraderStockPage::calculateProfits(std::vector<Order>& buyQue, const Order& sold) {
