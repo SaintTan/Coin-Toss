@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Stock\src;$(SolutionDir)SimulationData\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Stock\src;$(SolutionDir)Data\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Stock\src;$(SolutionDir)SimulationData\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Stock\src;$(SolutionDir)Data\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,7 +150,7 @@
     <ClCompile Include="src\Trader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimulationData\SimulationData.vcxproj">
+    <ProjectReference Include="..\Data\Data.vcxproj">
       <Project>{e575eb73-6c02-47a2-ab00-0e75704aeead}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Stock\Stock.vcxproj">

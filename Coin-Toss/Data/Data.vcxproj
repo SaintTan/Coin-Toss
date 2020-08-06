@@ -41,7 +41,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{e575eb73-6c02-47a2-ab00-0e75704aeead}</ProjectGuid>
-    <RootNamespace>SimulationData</RootNamespace>
+    <RootNamespace>Data</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Data</ProjectName>
   </PropertyGroup>

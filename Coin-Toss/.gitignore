@@ -244,5 +244,5 @@ paket-files/
 .idea/
 *.sln.iml
 
-SimulationData/data/datasource.txt
+Data/data/datasource.txt
 Market/data
