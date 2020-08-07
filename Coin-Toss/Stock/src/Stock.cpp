@@ -11,14 +11,14 @@ Stock::Stock::Stock(const std::wstring& stockID, StockQue& topPrices, std::vecto
 //updates stockRecordd and candlesticks
 void Stock::Stock::updateStockQue1() {
 	s_stockRecord.updateStockRecord(*s_topCur);
-	for (auto candlestick = s_candleSticks.begin(); candlestick != s_candleSticks.end(); candlestick++) {
-		candlestick->updateCandleStick(*s_topCur, *s_stockRecord.getStockQue());
-	}
 }
 
 //updates the total volume
 void Stock::Stock::updateStockQue2() {
 	s_totalVol = getTotalVol(*s_topCur);
+	for (auto candlestick = s_candleSticks.begin(); candlestick != s_candleSticks.end(); candlestick++) {
+		candlestick->updateCandleStick(*s_topCur, *s_stockRecord.getStockQue());
+	}
 }
 
 //returns stockque

@@ -13,7 +13,7 @@ Data::DataManager::DataManager(std::vector<Stock::Stock>& stocks):dm_stocksize(0
 	dm_quedata = new QueData(stock_ids.size());
 	
 	//get time intervals
-	std::vector<unsigned int> intervals = {1000,2500, 10000, 25000, 50000};
+	std::vector<unsigned int> intervals = {100};
 
 	//reserving size for stocks
 	stocks.reserve(stock_ids.size());

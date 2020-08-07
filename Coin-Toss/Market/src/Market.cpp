@@ -11,7 +11,7 @@ void Market::Market::updateStock() {
 	//data update
 	m_datamanager.updateData(m_stocks);
 	//inform brokers
-	updateBroker();
+//	updateBroker();
 }
 
 //informs brokers of data update
