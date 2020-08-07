@@ -6,5 +6,7 @@ int main() {
 	//starts market components
 	Market::Market market(id);
 	//updates data
-	market.updateStock();
+	for (int i = 0; i < 1000; i++) {
+		market.updateStock();
+	}
 }

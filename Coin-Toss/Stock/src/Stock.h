@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+static unsigned int getTotalVol(const Stock::StockQue& stockque); //calculates the total amount of volume inside the stock que
+
 namespace Stock {
 	class Stock {
 	private:
@@ -15,9 +17,11 @@ namespace Stock {
 		unsigned int s_totalVol; //total volume of stockque
 	private:
 	public:
-		Stock(const std::wstring&, StockQue&, std::vector<unsigned int>&, unsigned int); //stockID, s_topCur, cs_interval, total_vol
-		void updateStockQue(unsigned int); //totalVol : updates stockRecordd and candlesticks
+		Stock(const std::wstring&, StockQue&, std::vector<unsigned int>&); //stockID, s_topCur, cs_interval
+		void updateStockQue1(); //updates stockRecordd and candlesticks
+		void updateStockQue2(); //updates totalVol
 		std::wstring get_stockID() const; //returns stockID
+		StockQue* getStockQue() const;
 		~Stock();
 	protected:
 	};
