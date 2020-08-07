@@ -1,4 +1,18 @@
 #pragma once
+#include "StockQue.h"
+#include <iostream>
+
+struct HighLowPrice {
+private:
+public:
+	bool changes;
+	float highestPrice;
+	float lowestPrice;
+	HighLowPrice(float hPrice, float lPrice):changes(true), highestPrice(hPrice), lowestPrice(lPrice) {}
+protected:
+};
+
+static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::StockQue& previous);
 
 namespace Stock {
 
@@ -10,7 +24,7 @@ namespace Stock {
 	public:
 		CandleStick();
 		CandleStick(float, float , int); //maxPrice, minPrice, tickInterval
-		void updateCandleStick(float, float); //maxPrice, minPrice : updates candlestick *NEEDS REVISION
+		void updateCandleStick(const StockQue&, const StockQue&); //maxPrice, minPrice : updates candlestick *NEEDS REVISION
 		~CandleStick();
 	protected:
 	};

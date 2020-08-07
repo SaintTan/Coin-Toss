@@ -7,7 +7,8 @@ namespace Stock {
 		StockQue sr_topPrevPrices; //stockque
 	public:
 		StockRecord(int); //cs_Interval
-		void updateStockRecord(const StockQue&); //update stockque
+		const StockQue* getStockQue() const; //return stockque
+		void updateStockRecord(const StockQue&); //stockque : updates stockRecord 
 		~StockRecord();
 	protected:
 	};
