@@ -7,11 +7,11 @@ namespace Market {
 	struct Order {
 	private:
 	public:
-		const Stock::Stock* o_stock;
-		unsigned int o_orderID;
-		std::string o_mode;
-		unsigned int o_volume;
-		float o_price;
+		const Stock::Stock* o_stock; //pointer to stock
+		unsigned int o_orderID; //orderID
+		std::string o_mode; //mode of transaction
+		unsigned int o_volume; //volume
+		float o_price; //price
 		
 	public:
 		Order(const Stock::Stock& stock, unsigned int order_id, const std::string& mode, unsigned int volume, float price):
@@ -22,9 +22,9 @@ namespace Market {
 	struct OrderQue {
 	private:
 	public:
-		std::vector<Order> oq_sent_ordersB;
-		std::vector<Order> oq_sent_ordersS;
-		std::vector<Order> oq_confirmBuys;
+		std::vector<Order> oq_sent_ordersB; //stores sent buy orders
+		std::vector<Order> oq_sent_ordersS; //stores sent sell orders
+		std::vector<Order> oq_confirmBuys; //stores orders of confirmed bought
 
 		OrderQue(unsigned int num) {
 			oq_sent_ordersB.reserve(num);

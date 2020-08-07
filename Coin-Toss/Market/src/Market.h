@@ -8,14 +8,14 @@
 namespace Market {
 	class Market {
 	private:
-		std::string m_marketID;
-		std::vector<Stock::Stock> m_stocks;
-		Data::DataManager m_datamanager;
-		std::vector<Broker*> m_brokers;
+		std::string m_marketID; //ID for market
+		std::vector<Stock::Stock> m_stocks; //stores stocks 
+		Data::DataManager m_datamanager; //data manager 
+		std::vector<Broker*> m_brokers; //stores pointers to brokers
 	public:
-		Market(const std::string&);
-		void updateStock();
-		void updateBroker();
+		Market(const std::string&); //marketIID
+		void updateStock(); //updates data of stocks
+		void updateBroker(); //informs brokers of data update
 		~Market();
 	protected:
 	};
