@@ -8,6 +8,7 @@ Stock::Stock::Stock(const std::wstring& stockID, StockQue& topPrices, std::vecto
 	}
 };
 
+//totalVol : updates stockRecordd and candlesticks
 void Stock::Stock::updateStockQue(unsigned int totalVol) {
 	s_totalVol = totalVol;
 	s_stockRecord.updateStockRecord(*s_topCur);
@@ -16,6 +17,7 @@ void Stock::Stock::updateStockQue(unsigned int totalVol) {
 	}
 }
 
+//returns stockID
 std::wstring Stock::Stock::get_stockID() const {
 	return s_stockID;
 }
