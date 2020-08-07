@@ -10,8 +10,8 @@ namespace Data {
 	struct DataPackageQue {
 	private:
 	public:
-		unsigned int dpq_num;
-		Stock::StockQue dpq_stockque;
+		const unsigned int dpq_num; //assign value for datastream
+		Stock::StockQue dpq_stockque; //stockque
 	public:
 		DataPackageQue(unsigned int i, unsigned int stockqueNum) : dpq_num(i), dpq_stockque(stockqueNum) {}
 	};
@@ -25,7 +25,7 @@ namespace Data {
 	public:
 		QueData(unsigned int);
 		static void getFileNames(std::vector<std::wstring>&); //filenames : returns the filenames inside the directory specified in qd_location
-		Stock::StockQue* getStockQue(unsigned int i);
+		Stock::StockQue* getStockQue(unsigned int); // i, returns a pointer to the stockque
 		void updateData(); //i, stockque : updates data
 		~QueData();
 	protected:

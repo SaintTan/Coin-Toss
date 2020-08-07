@@ -2,11 +2,14 @@
 
 Data::DataManager::DataManager(std::vector<Stock::Stock>& stocks):dm_stocksize(0) {
 	std::vector<std::wstring> stock_ids;
+
 	//get ids
 	QueData::getFileNames(stock_ids);
+
 	//get number of stuck
 	dm_stocksize = stock_ids.size();
-	//reserving number of stock and initialize vector of stockques
+
+	//initializing QueData
 	dm_quedata = new QueData(stock_ids.size());
 	
 	//get time intervals
@@ -25,11 +28,13 @@ Data::DataManager::DataManager(std::vector<Stock::Stock>& stocks):dm_stocksize(0
 
 //updates data
 void Data::DataManager::updateData(std::vector<Stock::Stock>& stocks){
+	//updates stock before data update
 	for (auto stock = stocks.begin(); stock != stocks.end(); stock++) {
 		stock->updateStockQue1();
 	}
 	//update data
 	dm_quedata->updateData();
+	//updates stock after data update
 	for (auto stock = stocks.begin(); stock != stocks.end(); stock++) {
 		stock->updateStockQue2();
 	}

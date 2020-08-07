@@ -3,7 +3,9 @@
 std::wstring Data::QueData::qd_location = L"StockQue_Source.txt";
 
 Data::QueData::QueData(unsigned int stockqueNum):Data(qd_location){
+	//reserves number of stock
 	qd_stockques.reserve(stockqueNum);
+	//initialize stockque data
 	for (unsigned int i = 0; i < stockqueNum; i++) {
 		std::string string;
 		this->getData(i, string);
@@ -25,29 +27,23 @@ void Data::QueData::process_data(const std::string& string, Stock::StockQue& sto
 	std::string tempString = string;
 	//get position of a string to cut
 	std::size_t tempNum;
-	//temporary string to convert to a number
-	std::string tempStr;
 
 	for (unsigned int i = 0; i < stockque.mq_size; i++) {
 		//gets buy price
 		tempNum = tempString.find(',');
-		tempStr = tempString.substr(0, tempNum++);
-		stockque.mq_topPrice_B[i] = std::stof(tempStr);
+		stockque.mq_topPrice_B[i] = std::stof(tempString.substr(0, tempNum++));
 		tempString.erase(0, tempNum);
 		//gets buy volume
 		tempNum = tempString.find(',');
-		tempStr = tempString.substr(0, tempNum++);
-		stockque.mq_topVol_B[i] = std::stoul(tempStr);
+		stockque.mq_topVol_B[i] = std::stoul(tempString.substr(0, tempNum++));
 		tempString.erase(0, tempNum);
 		//gets sell price
 		tempNum = tempString.find(',');
-		tempStr = tempString.substr(0, tempNum++);
-		stockque.mq_topPrice_S[i] = std::stof(tempStr);
+		stockque.mq_topPrice_S[i] = std::stof(tempString.substr(0, tempNum++));
 		tempString.erase(0, tempNum);
 		//gets sell volume
 		tempNum = tempString.find(';');
-		tempStr = tempString.substr(0, tempNum++);
-		stockque.mq_topVol_S[i] = std::stoul(tempStr);
+		stockque.mq_topVol_S[i] = std::stoul(tempString.substr(0, tempNum++));
 		tempString.erase(0, tempNum);
 	}
 }
@@ -64,9 +60,12 @@ Stock::StockQue* Data::QueData::getStockQue(unsigned int i) {
 
 //updates data
 void Data::QueData::updateData() {
+	//loop through all active stockque
 	for (auto stockque = qd_stockques.begin(); stockque != qd_stockques.end(); stockque++) {
+		//gets string
 		std::string string;
 		this->getData(stockque->dpq_num, string);
+		//checks for empty string
 		if (string == "") {
 			for (unsigned int i = 0; i < stockque->dpq_stockque.mq_size; i++) {
 				stockque->dpq_stockque.mq_topPrice_B[i] = 0;
@@ -76,6 +75,7 @@ void Data::QueData::updateData() {
 				return;
 			}
 		}
+		//processes data
 		process_data(string, stockque->dpq_stockque);
 	}
 }
