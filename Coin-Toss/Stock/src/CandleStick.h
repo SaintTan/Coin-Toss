@@ -1,13 +1,13 @@
 #pragma once
 #include "StockQue.h"
-#include <iostream>
 
 struct HighLowPrice {
 private:
 public:
+	bool changes;
 	float highestPrice;
 	float lowestPrice;
-	HighLowPrice(float hPrice, float lPrice):highestPrice(hPrice), lowestPrice(lPrice) {}
+	HighLowPrice():highestPrice(0), lowestPrice(0), changes(true) {}
 protected:
 };
 

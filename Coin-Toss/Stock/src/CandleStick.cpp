@@ -18,16 +18,18 @@ void Stock::CandleStick::updateCandleStick(const Stock::StockQue& current, const
 		cs_tickTime = 0;
 	}
 	else {
-		//if traded price is lower than previous records
-		if (price.lowestPrice < cs_minPrice) {
-			cs_minPrice = price.lowestPrice;
+		if (price.changes) {
+			//if traded price is lower than previous records
+			if (price.lowestPrice < cs_minPrice) {
+				cs_minPrice = price.lowestPrice;
+			}
+			//if traded price is bigger than previous records
+			if (price.highestPrice > cs_maxPrice) {
+				cs_maxPrice = price.highestPrice;
+			}
+			//closing price is always the latest trade - assumes highest price is the last trade
+			cs_closePrice = price.highestPrice;
 		}
-		//if traded price is bigger than previous records
-		if (price.highestPrice > cs_maxPrice) {
-			cs_maxPrice = price.highestPrice;
-		}
-		//closing price is always the latest trade - assumes highest price is the last trade
-		cs_closePrice = price.highestPrice;
 	}
 	cs_tickTime++;
 	return;
@@ -40,33 +42,81 @@ static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::St
 	float buy_pdiff = current.mq_topPrice_B[0] - previous.mq_topPrice_B[0];
 	float sell_pdiff = current.mq_topPrice_S[0] - previous.mq_topPrice_S[0];
 
-	HighLowPrice prices(current.mq_topPrice_B[0] + 0.01f, current.mq_topPrice_S[0] - 0.01f);
+	//determine difference in volume
+	unsigned int buy_vdiff = current.mq_topVol_B[0] - previous.mq_topPrice_B[0];
+	unsigned int sell_vdiff = current.mq_topVol_S[0] - previous.mq_topPrice_S[0];
+
+	HighLowPrice prices;
 	
 	//if price did not change
 	if (!buy_pdiff && !sell_pdiff) {
-		
-		//deermine difference in volume
-		unsigned int buy_vdiff = current.mq_topVol_B[0] - previous.mq_topPrice_B[0];
-		unsigned int sell_vdiff = current.mq_topVol_S[0] - previous.mq_topPrice_S[0];
 		if (buy_vdiff < 0) {
-			prices.highestPrice = prices.lowestPrice = current.mq_topPrice_B[0];
+			prices.lowestPrice = current.mq_topPrice_B[0];
 		}
-		else if (sell_vdiff < 0) {
-			prices.highestPrice = prices.lowestPrice = current.mq_topPrice_S[0];
+		if (sell_vdiff < 0) {
+			prices.highestPrice =  current.mq_topPrice_S[0];
 		}
-		return prices;
+		else {
+			prices.changes = false;
+		}
 	}
+	//if price changes
 	else {
-		//if price is increasing
+		float tempNum = 0;
+		//logic for when both price goes up
 		if (buy_pdiff > 0 && sell_pdiff > 0) {
-			prices.lowestPrice = previous.mq_topPrice_B[0] + 0.01f;
-			prices.highestPrice = current.mq_topPrice_S[0] - 0.01f;
+			prices.highestPrice = current.mq_topPrice_B.front();
+			prices.lowestPrice = previous.mq_topPrice_S.front();
+			for (unsigned int i = 0; i < previous.mq_size; i++) {
+				if (current.mq_topPrice_B.front() < previous.mq_topPrice_S[i]) {
+					prices.highestPrice = previous.mq_topPrice_S[i-1];
+					break;
+				}
+			}
 		}
-		//if price is decreasing
+		//logic for when both price goes down
 		else if (buy_pdiff < 0 && sell_pdiff < 0) {
-			prices.lowestPrice = current.mq_topPrice_B[0] + 0.01f;
-			prices.highestPrice = previous.mq_topPrice_S[0] - 0.01f;
+			prices.highestPrice = previous.mq_topPrice_B.front();
+			prices.lowestPrice = current.mq_topPrice_S.front();
+			for (unsigned int i = 0; i < previous.mq_size; i++) {
+				if (current.mq_topPrice_S.front() > previous.mq_topPrice_B[i]) {
+					prices.lowestPrice = current.mq_topPrice_S[i - 1];
+					break;
+				}
+			}
 		}
-		return prices;
+		//if buy is going down and sell is going up * MIGHT NEED REVIEW
+		else if (buy_pdiff < 0 && sell_pdiff>0) {
+			prices.highestPrice = current.mq_topPrice_S.front();
+			prices.lowestPrice = current.mq_topPrice_B.back();
+		}
+		//logic for price "filling"
+		else if (buy_pdiff > 0 || sell_pdiff < 0) {
+			prices.changes = false;
+		}
+		//logic for buy price going down
+		else if (buy_pdiff < 0) {
+			prices.highestPrice = previous.mq_topPrice_B.front();
+			prices.lowestPrice = previous.mq_topPrice_B.back();
+			for (unsigned int i = 0; i < previous.mq_size; i++) {
+				if (current.mq_topPrice_B.front() > previous.mq_topPrice_B[i]) {
+					prices.lowestPrice = previous.mq_topPrice_B[i-1];
+					break;
+				}
+			}
+		}
+		//logic for sell price going up
+		else if (sell_pdiff > 0){
+			prices.highestPrice = previous.mq_topPrice_S.back();
+			prices.lowestPrice = previous.mq_topPrice_S.front();
+			for (unsigned int i = 0; i < previous.mq_size; i++) {
+				if (current.mq_topPrice_S.front() < previous.mq_topPrice_S[i]) {
+					prices.highestPrice = previous.mq_topPrice_S[i - 1];
+					break;
+				}
+			}
+		}
+		
 	}
+	return prices;
 }
