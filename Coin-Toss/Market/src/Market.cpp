@@ -11,15 +11,20 @@ void Market::Market::updateStock() {
 	//data update
 	m_datamanager.updateData(m_stocks);
 	//inform brokers
-//	updateBroker();
+	updateBroker();
 }
 
 //informs brokers of data update
 void Market::Market::updateBroker() {
 	//inform all brokers
-	for (auto broker = m_brokers.begin(); broker != m_brokers.end(); broker++) {
-		(*broker)->receiveUpdate();
+	for (auto broker : m_brokers) {
+		broker->receiveUpdate();
 	}
 }
 
-Market::Market::~Market() {}
+Market::Market::~Market() {
+	for (auto broker : m_brokers) {
+		delete broker;
+	}
+	m_brokers.clear();
+}

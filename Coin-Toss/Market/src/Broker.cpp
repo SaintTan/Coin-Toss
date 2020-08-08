@@ -15,9 +15,9 @@ void Market::Broker::receiveOrder(const Order& order, const Market::Trader& trad
 //order, trader : confirms order and notify trader
 void Market::Broker::confirmOrder(const Order& order, const Market::Trader& trader) {
 	//looks for trader and informs them
-	for (auto b_trader = b_traders.begin(); b_trader != b_traders.end(); b_trader++) {
-		if (*(*b_trader) == trader) {
-			(*b_trader)->orderConfirm(order);
+	for (auto b_trader : b_traders) {
+		if (*b_trader == trader) {
+			b_trader->orderConfirm(order);
 		}
 	}
 	return;
@@ -26,11 +26,14 @@ void Market::Broker::confirmOrder(const Order& order, const Market::Trader& trad
 //receives dataupdate and informs traders
 void Market::Broker::receiveUpdate() {
 	//updates every trader
-	for (auto trader = b_traders.begin(); trader != b_traders.end(); trader++) {
-		(*trader)->makeDecision();
+	for (auto trader : b_traders) {
+		trader->makeDecision();
 	}
 }
 
 Market::Broker::~Broker() {
+	for (auto trader : b_traders) {
+		delete trader;
+	}
 	b_traders.clear();
 }

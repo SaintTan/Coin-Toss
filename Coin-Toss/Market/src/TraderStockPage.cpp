@@ -1,8 +1,8 @@
 #include "TraderStockPage.h"
 #include "Trader.h"
 
-Market::TraderStockPage::TraderStockPage(const Stock::Stock& stock, double totalBal, unsigned int volLim, Trader* trader)
-	: tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(trader), tsp_orderques(OrderQue(25)) {
+Market::TraderStockPage::TraderStockPage(unsigned int ID, const Stock::Stock& stock, double totalBal, unsigned int volLim, Trader* trader)
+	: tsp_ID(ID),tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(trader), tsp_orderques(OrderQue(25)) {
 }
 
 //calculates profit from orders - uses LIFO
@@ -87,14 +87,14 @@ void Market::TraderStockPage::confirmOrder(const Order& order) {
 //executes strategy for the stock
 void Market::TraderStockPage::executeStrat() {
 	std::string mode("buy");
-	Market::Order order(*tsp_stock, tsp_orderNum++, mode, 0 ,0);
+	Market::Order order(*tsp_stock, tsp_ID, tsp_orderNum++, mode, 0 ,0);
 	sendOrder(order);
 	return;
 }
 
 //returns current stock
-const Stock::Stock& Market::TraderStockPage::getStock() {
-	return *tsp_stock;
+unsigned int Market::TraderStockPage::getID() const {
+	return tsp_ID;
 }
 
 //: error handling * not implemented yet

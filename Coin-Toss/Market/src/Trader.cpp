@@ -3,9 +3,10 @@
 
 Market::Trader::Trader(unsigned int traderID, const std::vector<Stock::Stock>& stocks, Broker* broker): t_traderID(traderID), t_currentBal(100000), t_profitLoss(0), t_broker(broker){
 	t_stockpages.reserve(stocks.size());
-	for (auto stock = stocks.begin(); stock != stocks.end(); stock++) {
+	unsigned int tradePage_ID = 0;
+	for (auto stock : stocks) {
 		unsigned int vol = 1000;
-		t_stockpages.emplace_back(new TraderStockPage(*stock, t_currentBal/stocks.size(), vol, this));
+		t_stockpages.emplace_back(TraderStockPage(tradePage_ID++, stock, t_currentBal/stocks.size(), vol, this));
 	}
 }
 
@@ -19,8 +20,8 @@ bool Market::Trader::sendOrder(const Order& order, const TraderStockPage& stockP
 //runs algorithm to decide on action of updated stock data
 void Market::Trader::makeDecision() {
 	//goes through each stockpage and executing algorithm for the stocks
-	for (auto stockpage = t_stockpages.begin(); stockpage != t_stockpages.end(); stockpage++) {
-		(*stockpage)->executeStrat();
+	for (auto stockpage : t_stockpages) {
+		stockpage.executeStrat();
 	}
 }
 
@@ -34,9 +35,9 @@ void Market::Trader::orderConfirm(const Order& order) {
 		t_currentBal += (double)order.o_price * (double)order.o_volume;
 	}
 	//informs stockpages of the confirmed orders
-	for (auto t_order = t_stockpages.begin(); t_order != t_stockpages.end(); t_order++) {
-		if ((*t_order)->getStock().get_stockID() == order.o_stock->get_stockID()) {
-			(*t_order)->confirmOrder(order);
+	for (auto stockpage : t_stockpages) {
+		if (stockpage.getID() == order.o_orderID) {
+			stockpage.confirmOrder(order);
 			break;
 		}
 	}
