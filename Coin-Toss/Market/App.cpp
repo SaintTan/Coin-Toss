@@ -3,6 +3,10 @@
 
 int main() {
 	std::string id = "001";
+	//starts market components
 	Market::Market market(id);
-	market.updateStock();
+	//updates data
+	for (int i = 0; i < 100; i++) {
+		market.updateStock();
+	}
 }
