@@ -1,10 +1,8 @@
 # Coin-Toss
 ## Introduction
------
 Coin-Toss is a program that tries to simulate stock trades on the market based on past information. It allows individuals to create trading bots and test it against real-life trading environment.
 
 ## Architecture
------
 ### Namespaces and Classes
 #### *Data*
 Stores any information relevant to generation/maintenance of data. classes includes:
