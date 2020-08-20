@@ -27,8 +27,8 @@ void Stock::CandleStick::updateCandleStick(const Stock::StockQue& current, const
 			if (price.highestPrice > cs_maxPrice) {
 				cs_maxPrice = price.highestPrice;
 			}
-			//closing price is always the latest trade - assumes highest price is the last trade
-			cs_closePrice = price.highestPrice;
+			//closing price is always the latest trade - assumes median
+			cs_closePrice = (price.highestPrice+price.lowestPrice)/2;
 		}
 	}
 	cs_tickTime++;
@@ -42,14 +42,13 @@ static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::St
 	float buy_pdiff = current.mq_topPrice_B[0] - previous.mq_topPrice_B[0];
 	float sell_pdiff = current.mq_topPrice_S[0] - previous.mq_topPrice_S[0];
 
-	//determine difference in volume
-	unsigned int buy_vdiff = current.mq_topVol_B[0] - previous.mq_topPrice_B[0];
-	unsigned int sell_vdiff = current.mq_topVol_S[0] - previous.mq_topPrice_S[0];
-
 	HighLowPrice prices;
 	
 	//if price did not change
 	if (!buy_pdiff && !sell_pdiff) {
+		//determine difference in volume
+		unsigned int buy_vdiff = current.mq_topVol_B[0] - previous.mq_topPrice_B[0];
+		unsigned int sell_vdiff = current.mq_topVol_S[0] - previous.mq_topPrice_S[0];
 		if (buy_vdiff < 0) {
 			prices.lowestPrice = current.mq_topPrice_B[0];
 		}
@@ -62,7 +61,6 @@ static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::St
 	}
 	//if price changes
 	else {
-		float tempNum = 0;
 		//logic for when both price goes up
 		if (buy_pdiff > 0 && sell_pdiff > 0) {
 			prices.highestPrice = current.mq_topPrice_B.front();
