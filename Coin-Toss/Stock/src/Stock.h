@@ -3,6 +3,7 @@
 #include "StockRecord.h"
 #include "StockQue.h"
 #include <string>
+#include <queue>
 #include <vector>
 
 static unsigned int getTotalVol(const Stock::StockQue& stockque); //calculates the total amount of volume inside the stock que
