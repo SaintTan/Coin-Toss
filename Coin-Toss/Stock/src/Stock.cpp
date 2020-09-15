@@ -1,12 +1,8 @@
 #include "Stock.h"
 
 Stock::Stock::Stock(const std::wstring& stockID, StockQue& topPrices, std::vector<unsigned int>& csInterval)
-	:s_stockID(stockID), s_topCur(&topPrices), s_stockRecord(StockRecord(topPrices.mq_size)), s_totalVol(getTotalVol(topPrices)) {
-	s_candleSticks.reserve(csInterval.size());
-	for (unsigned int i = 0; i < csInterval.size(); i++) {
-		s_candleSticks.emplace_back(topPrices.mq_topPrice_S[0], topPrices.mq_topPrice_B[0], csInterval[i]);
-	}
-};
+	:s_stockID(stockID), s_topCur(&topPrices), s_stockRecord(StockRecord(topPrices.mq_size)), s_totalVol(getTotalVol(topPrices)), 
+	s_candleStickManager(CandleStickManager(topPrices.mq_topPrice_S[0], topPrices.mq_topPrice_B[0], 5, csInterval)) {};
 
 //updates stockRecordd and candlesticks
 void Stock::Stock::updateStockQue1() {
@@ -16,9 +12,7 @@ void Stock::Stock::updateStockQue1() {
 //updates the total volume
 void Stock::Stock::updateStockQue2() {
 	s_totalVol = getTotalVol(*s_topCur);
-	for (auto candlestick = s_candleSticks.begin(); candlestick != s_candleSticks.end(); candlestick++) {
-		candlestick->updateCandleStick(*s_topCur, *s_stockRecord.getStockQue());
-	}
+	s_candleStickManager.updateCandleSticks(*s_topCur, *s_stockRecord.getStockQue());
 }
 
 //returns stockque

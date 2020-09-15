@@ -141,12 +141,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Analysis.cpp" />
-    <ClCompile Include="CandleStickAnalysis.cpp" />
+    <ClCompile Include="src\Analysis.cpp" />
+    <ClCompile Include="src\CandleStickAnalysis.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Analysis.h" />
-    <ClInclude Include="CandleStickAnalysis.h" />
+    <ClInclude Include="src\Analysis.h" />
+    <ClInclude Include="src\CandleStickAnalysis.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Stock\Stock.vcxproj">

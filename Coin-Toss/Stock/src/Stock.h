@@ -1,5 +1,5 @@
 #pragma once
-#include "CandleStick.h"
+#include "CandleStickManager.h"
 #include "StockRecord.h"
 #include "StockQue.h"
 #include <string>
@@ -14,7 +14,7 @@ namespace Stock {
 		std::wstring s_stockID; //ID of stock - also stock symbol
 		StockQue* s_topCur; //stockque
 		StockRecord s_stockRecord; //previous stockrecord
-		std::vector<CandleStick> s_candleSticks; //candle stick with different intervals
+		CandleStickManager s_candleStickManager; //candle stick with different intervals
 		unsigned int s_totalVol; //total volume of stockque
 	private:
 	public:
