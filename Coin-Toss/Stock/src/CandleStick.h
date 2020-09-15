@@ -22,6 +22,7 @@ namespace Stock {
 		CandleStick(float); //opening price
 		CandleStick(float, float); //maxPrice, minPrice
 		void updateCandleStick(const StockQue&, const StockQue&); //maxPrice, minPrice : updates candlestick *NEEDS REVISION
+		float getClosePrice();
 		~CandleStick();
 	protected:
 	};

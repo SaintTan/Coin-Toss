@@ -24,6 +24,10 @@ void Stock::CandleStick::updateCandleStick(const Stock::StockQue& current, const
 	return;
 };
 
+float Stock::CandleStick::getClosePrice() {
+	return cs_closePrice;
+}
+
 Stock::CandleStick::~CandleStick() {}
 
 static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::StockQue& previous) {

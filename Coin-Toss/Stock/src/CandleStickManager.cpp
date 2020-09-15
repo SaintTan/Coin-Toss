@@ -12,17 +12,20 @@ void Stock::CandleStickManager::updateCandleSticks(const Stock::StockQue& curren
 	for (auto candlesticks = csm_candleSticks.begin(); candlesticks != csm_candleSticks.end(); candlesticks++) {
 		if (candlesticks->csd_curTick >= candlesticks->csd_tickInterval) {
 			if (candlesticks->csd_candleSticks.size() < csm_numRecord) {
-				candlesticks->csd_candleSticks.emplace_back(CandleStick(current.mq_topPrice_S[0]));
+				candlesticks->csd_candleSticks.emplace_back(CandleStick(candlesticks->csd_candleSticks[candlesticks->csd_candleSticks.size()-1].getClosePrice()));
 			}
 			else {
 				for (int i = 0; i < (candlesticks->csd_candleSticks.size() - 1); i++) {
 					candlesticks->csd_candleSticks[i] = candlesticks->csd_candleSticks[i + 1];
 				}
-				candlesticks->csd_candleSticks[csm_candleSticks.size() - 1] = CandleStick(current.mq_topPrice_S[0]);
+				candlesticks->csd_candleSticks[csm_candleSticks.size() - 1] = CandleStick(candlesticks->csd_candleSticks[csm_candleSticks.size() - 1].getClosePrice());
 			}
+			candlesticks->csd_curTick = 0;
 		}
 		else {
 			candlesticks->csd_candleSticks[0].updateCandleStick(current, previous);
+			candlesticks->csd_curTick++;
 		}
+		
 	}
 }
