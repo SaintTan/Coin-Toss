@@ -5,8 +5,6 @@
 
 class CandleStickAnalysis : public Analysis{
 private:
-	unsigned int timeInterval;
-	std::queue<Stock::CandleStick> candleSticks;
 public:
 protected:
 };

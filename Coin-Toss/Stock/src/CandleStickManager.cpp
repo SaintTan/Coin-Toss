@@ -1,4 +1,5 @@
 #include "CandleStickManager.h"
+#include <iostream>
 
 Stock::CandleStickManager::CandleStickManager(float min_price, float max_price, unsigned int numRuns, std::vector<unsigned int>& cs_intervals)
 	: csm_numRuns(numRuns), csm_numRecord(cs_intervals.size()) {
@@ -15,16 +16,19 @@ void Stock::CandleStickManager::updateCandleSticks(const Stock::StockQue& curren
 				candlesticks->csd_candleSticks.emplace_back(CandleStick(candlesticks->csd_candleSticks[candlesticks->csd_candleSticks.size()-1].getClosePrice()));
 			}
 			else {
-				for (unsigned int i = 0; i < (candlesticks->csd_candleSticks.size() - 1); i++) {
-					candlesticks->csd_candleSticks[i] = candlesticks->csd_candleSticks[i + 1];
+				for (unsigned int i = (candlesticks->csd_candleSticks.size() - 1); i > 0; i--) {
+					candlesticks->csd_candleSticks[i] = candlesticks->csd_candleSticks[i - 1];
 				}
-				candlesticks->csd_candleSticks[candlesticks->csd_candleSticks.size() - 1] = CandleStick(candlesticks->csd_candleSticks[candlesticks->csd_candleSticks.size() - 2].getClosePrice());
+				candlesticks->csd_candleSticks[0] = CandleStick(candlesticks->csd_candleSticks[1].getClosePrice());
 			}
 			candlesticks->csd_curTick = 0;
 		}
 		else {
 			candlesticks->csd_candleSticks[0].updateCandleStick(current, previous);
 			candlesticks->csd_curTick++;
+		}
+		for (auto candlestick = candlesticks->csd_candleSticks.begin(); candlestick != candlesticks->csd_candleSticks.end(); candlestick++) {
+			std::cout << candlestick->getClosePrice() << std::endl;
 		}
 		
 	}
