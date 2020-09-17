@@ -10,8 +10,8 @@ namespace Data {
 		QueData* dm_quedata; //deals with update of stockque data
 		unsigned int dm_stocksize; //stores size of stocks
 	public:
-		DataManager(std::vector<Stock::Stock>&); //stocks 
-		void updateData(std::vector<Stock::Stock>&); //stocks : updates data
+		DataManager(std::vector<Stock::Stock*>&); //stocks 
+		void updateData(std::vector<Stock::Stock*>&); //stocks : updates data
 		~DataManager();
 	protected:
 	};

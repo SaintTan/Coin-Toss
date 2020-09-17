@@ -9,7 +9,7 @@ namespace Market {
 	class Market {
 	private:
 		std::string m_marketID; //ID for market
-		std::vector<Stock::Stock> m_stocks; //stores stocks 
+		std::vector<Stock::Stock*> m_stocks; //stores stocks 
 		Data::DataManager m_datamanager; //data manager 
 		std::vector<Broker*> m_brokers; //stores pointers to brokers
 	public:

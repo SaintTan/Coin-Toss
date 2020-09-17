@@ -1,6 +1,6 @@
 #include "DataManager.h"
 
-Data::DataManager::DataManager(std::vector<Stock::Stock>& stocks):dm_stocksize(0) {
+Data::DataManager::DataManager(std::vector<Stock::Stock*>& stocks):dm_stocksize(0) {
 	std::vector<std::wstring> stock_ids;
 
 	//get ids
@@ -21,22 +21,22 @@ Data::DataManager::DataManager(std::vector<Stock::Stock>& stocks):dm_stocksize(0
 	//adding in stock elements
 	for (unsigned int i = 0; i < dm_stocksize; i++) {
 		Stock::StockQue* stockque = dm_quedata->getStockQue(i);
-		stocks.emplace_back(Stock::Stock(stock_ids[i], *stockque, intervals));
+		stocks.emplace_back(new Stock::Stock(stock_ids[i], *stockque, intervals));
 	}
 	return;
 }
 
 //updates data
-void Data::DataManager::updateData(std::vector<Stock::Stock>& stocks){
+void Data::DataManager::updateData(std::vector<Stock::Stock*>& stocks){
 	//updates stock before data update
 	for (auto stock = stocks.begin(); stock != stocks.end(); stock++) {
-		stock->updateStockQue1();
+		(*stock)->updateStockQue1();
 	}
 	//update data
 	dm_quedata->updateData();
 	//updates stock after data update
 	for (auto stock = stocks.begin(); stock != stocks.end(); stock++) {
-		stock->updateStockQue2();
+		(*stock)->updateStockQue2();
 	}
 	return;
 }

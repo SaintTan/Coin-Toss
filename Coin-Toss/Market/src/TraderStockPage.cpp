@@ -3,9 +3,7 @@
 #include <iostream>
 
 Market::TraderStockPage::TraderStockPage(unsigned int ID, const Stock::Stock& stock, double totalBal, unsigned int volLim, Trader* trader)
-	: tsp_ID(ID),tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(trader), tsp_orderques(OrderQue(25)) {
-	std::cout << &stock << std::endl;
-}
+	: tsp_ID(ID),tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(trader), tsp_orderques(OrderQue(25)) {}
 
 //calculates profit from orders - uses LIFO
 double Market::TraderStockPage::calculateProfits(const Order& sold) {
@@ -90,7 +88,6 @@ void Market::TraderStockPage::confirmOrder(const Order& order) {
 void Market::TraderStockPage::executeStrat(){
 	std::string mode("buy");
 	TradeStrat::BasicStrat basicStrat;
-	std::cout << tsp_stock->getStockQue()->mq_size << std::endl;
 	float priceC = basicStrat.checkPriceChanges(*tsp_stock);
 	if (basicStrat.checkPriceChanges(*tsp_stock)) {
 		mode = "buy";
@@ -98,8 +95,8 @@ void Market::TraderStockPage::executeStrat(){
 	else {
 		mode = "sell";
 	}
-	//std::cout << mode << std::endl;
-	//std::cout << priceC << std::endl;
+	std::cout << mode << std::endl;
+	std::cout << priceC << std::endl;
 	Market::Order order(*tsp_stock, tsp_ID, tsp_orderNum++, mode, 0 ,0);
 	sendOrder(order);
 	return;

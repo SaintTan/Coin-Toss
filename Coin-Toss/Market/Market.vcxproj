@@ -150,6 +150,9 @@
     <ClCompile Include="src\Trader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Analysis\Analysis.vcxproj">
+      <Project>{2754cf5f-0eee-4a98-a290-73f5b93154da}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.vcxproj">
       <Project>{e575eb73-6c02-47a2-ab00-0e75704aeead}</Project>
     </ProjectReference>

@@ -12,7 +12,7 @@ namespace Market {
 		Broker* t_broker; //pointer to broker responsible for the trader
 		std::vector<TraderStockPage> t_stockpages; //stock pages
 	public:
-		Trader(unsigned int, const std::vector<Stock::Stock>&, Broker*); //traderID, stocks, broker
+		Trader(unsigned int, const std::vector<Stock::Stock*>&, Broker*); //traderID, stocks, broker
 		bool sendOrder(const Order&, const TraderStockPage&); //order, stockPage : sends order to broker and keeps track of which stockpage sent the instruction
 		void makeDecision(); //runs algorithm to decide on action of updated stock data
 		void orderConfirm(const Order&); //order : confirms order
