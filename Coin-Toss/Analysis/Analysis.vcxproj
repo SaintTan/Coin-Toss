@@ -142,12 +142,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\BasicAnalysis.cpp" />
-    <ClCompile Include="src\Analysis.cpp" />
     <ClCompile Include="src\CandleStickAnalysis.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BasicAnalysis.h" />
-    <ClInclude Include="src\Analysis.h" />
     <ClInclude Include="src\CandleStickAnalysis.h" />
   </ItemGroup>
   <ItemGroup>

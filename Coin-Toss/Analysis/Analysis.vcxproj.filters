@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Analysis.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\CandleStickAnalysis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -26,9 +23,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Analysis.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\CandleStickAnalysis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
