@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Analysis\src; $(SolutionDir)Stock\src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,6 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Analysis\src; $(SolutionDir)Stock\src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,15 +141,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Analysis\Analysis.vcxproj">
+      <Project>{2754cf5f-0eee-4a98-a290-73f5b93154da}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Stock\Stock.vcxproj">
       <Project>{814a065f-b91e-4d7d-a97b-a2e96650fc74}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Strategy.cpp" />
+    <ClCompile Include="src\BasicStrat.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Strategy.h" />
+    <ClInclude Include="src\BasicStrat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
