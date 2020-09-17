@@ -16,11 +16,11 @@ namespace Market {
 		unsigned int tsp_volume; //current held volume
 		OrderQue tsp_orderques; //order que of stockpage
 		Trader* tsp_trader; //trader
-		Stock::Stock* tsp_stock; //store pointer to stock 
+		const Stock::Stock* tsp_stock; //store pointer to stock 
 	private:
 		double calculateProfits(const Order&); //sold : calculates profit from orders - uses LIFO
 	public:
-		TraderStockPage(unsigned int, Stock::Stock&, double, unsigned int, Trader*); //id, stock, totalBal, volLim, trader
+		TraderStockPage(unsigned int, const Stock::Stock&, double, unsigned int, Trader*); //id, stock, totalBal, volLim, trader
 		void sendOrder(const Order&); //order : inform trader of a send order
 		void confirmOrder(const Order&);//order : confirms order
 		void executeStrat(); //executes strategy for the stock

@@ -1,9 +1,9 @@
 #include "BasicStrat.h"
 #include <iostream>
 
-bool TradeStrat::BasicStrat::checkPriceChanges(Stock::Stock& stock) {
-	Stock::StockQue* current = stock.getStockQue();
-	Stock::StockQue* previous = stock.getStockRecord()->getStockQue();
+bool TradeStrat::BasicStrat::checkPriceChanges(const Stock::Stock& stock) {
+	/*const Stock::StockQue* current = stock.getStockQue();
+	const Stock::StockQue* previous = stock.getStockRecord()->getStockQue();
 	std::cout << previous->mq_topPrice_B.empty() << std::endl;
 	if (previous->mq_topPrice_B.empty()) {
 		return false;
@@ -15,6 +15,6 @@ bool TradeStrat::BasicStrat::checkPriceChanges(Stock::Stock& stock) {
 	std::cout << buy_pc << std::endl;
 	if (sell_pc > 0 || buy_pc > 0) {
 		return true;
-	}
+	}*/
 	return false;
 }

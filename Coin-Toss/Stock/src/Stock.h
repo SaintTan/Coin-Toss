@@ -12,8 +12,8 @@ namespace Stock {
 	class Stock {
 	private:
 		std::wstring s_stockID; //ID of stock - also stock symbol
-		StockQue* s_topCur; //stockque
-		StockRecord* s_stockRecord; //previous stockrecord
+		const StockQue* s_topCur; //stockque
+		StockRecord s_stockRecord; //previous stockrecord
 		CandleStickManager s_candleStickManager; //candle stick with different intervals
 		unsigned int s_totalVol; //total volume of stockque
 	private:
@@ -22,8 +22,8 @@ namespace Stock {
 		void updateStockQue1(); //updates stockRecordd and candlesticks
 		void updateStockQue2(); //updates totalVol
 		std::wstring get_stockID() const; //returns stockID
-		StockRecord* getStockRecord(); //returns stockRecord 
-		StockQue* getStockQue(); //returns stockQue
+		const StockRecord* getStockRecord() const; //returns stockRecord 
+		const StockQue* getStockQue() const; //returns stockQue
 		~Stock();
 	protected:
 	};

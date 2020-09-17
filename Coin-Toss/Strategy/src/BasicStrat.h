@@ -6,7 +6,7 @@ namespace TradeStrat {
 	class BasicStrat{
 	private:
 	public:
-		bool checkPriceChanges(Stock::Stock&);
+		bool checkPriceChanges(const Stock::Stock&);
 	protected:
 	};
 }
