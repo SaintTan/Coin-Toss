@@ -86,15 +86,21 @@ void Market::TraderStockPage::confirmOrder(const Order& order) {
 
 //executes strategy for the stock
 void Market::TraderStockPage::executeStrat(){
-	std::string mode("buy");
+	std::string mode("null");
 	TradeStrat::BasicStrat basicStrat;
-	float priceC = basicStrat.checkPriceChanges(*tsp_stock);
-	if (basicStrat.checkPriceChanges(*tsp_stock)) {
-		mode = "buy";
+	int priceC = basicStrat.checkPriceChanges(*tsp_stock);
+	switch (priceC) {
+		case(-1):
+			mode = "sell";
+			break;
+		case(0):
+			mode = "null";
+			break;
+		case(1):
+			mode = "buy";
+			break;
 	}
-	else {
-		mode = "sell";
-	}
+	if (mode == "null") return;
 	std::cout << mode << std::endl;
 	std::cout << priceC << std::endl;
 	Market::Order order(*tsp_stock, tsp_ID, tsp_orderNum++, mode, 0 ,0);
