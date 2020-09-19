@@ -3,7 +3,7 @@
 #include <iostream>
 
 Market::TraderStockPage::TraderStockPage(unsigned int ID, const Stock::Stock& stock, double totalBal, unsigned int volLim, Trader* trader)
-	: tsp_ID(ID),tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(trader), tsp_orderques(OrderQue(25)) {}
+	: tsp_ID(ID),tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(trader), tsp_orderques(new OrderQue(25)) {}
 
 //calculates profit from orders - uses LIFO
 double Market::TraderStockPage::calculateProfits(const Order& sold) {
@@ -12,21 +12,21 @@ double Market::TraderStockPage::calculateProfits(const Order& sold) {
 	double profits = 0;
 	while (remainingVol > 0) {
 		//compares volume differences
-		if ((int)tsp_orderques.oq_confirmBuys.back().o_volume <= remainingVol) {
-			vol = tsp_orderques.oq_confirmBuys.back().o_volume;
+		if ((int)tsp_orderques->oq_confirmBuys.back().o_volume <= remainingVol) {
+			vol = tsp_orderques->oq_confirmBuys.back().o_volume;
 			//calculates profits
-			profits += ((double)tsp_orderques.oq_confirmBuys.back().o_price * (double)vol) - ((double)sold.o_price * (double)vol);
+			profits += ((double)tsp_orderques->oq_confirmBuys.back().o_price * (double)vol) - ((double)sold.o_price * (double)vol);
 			//calculates remaining volume
-			remainingVol -= tsp_orderques.oq_confirmBuys.back().o_volume;
+			remainingVol -= tsp_orderques->oq_confirmBuys.back().o_volume;
 			//deletes confirmed buys
-			tsp_orderques.oq_confirmBuys.pop_back();
+			tsp_orderques->oq_confirmBuys.pop_back();
 		}
 		else {
 			vol = remainingVol;
 			//calculates profit
-			profits += ((double)tsp_orderques.oq_confirmBuys.back().o_price * (double)vol) - ((double)sold.o_price * (double)vol);
+			profits += ((double)tsp_orderques->oq_confirmBuys.back().o_price * (double)vol) - ((double)sold.o_price * (double)vol);
 			//updates stock's volume
-			tsp_orderques.oq_confirmBuys.back().o_volume -= remainingVol;
+			tsp_orderques->oq_confirmBuys.back().o_volume -= remainingVol;
 			remainingVol = 0;
 		}
 	}
@@ -39,10 +39,10 @@ double Market::TraderStockPage::calculateProfits(const Order& sold) {
 void Market::TraderStockPage::sendOrder(const Order& order) {
 	//adding sent orders to respective fields
 	if (order.o_mode == "buy") {
-		tsp_orderques.oq_sent_ordersB.emplace_back(order);
+		tsp_orderques->oq_sent_ordersB.emplace_back(order);
 	}
 	else if (order.o_mode == "sell") {
-		tsp_orderques.oq_sent_ordersS.emplace_back(order);
+		tsp_orderques->oq_sent_ordersS.emplace_back(order);
 	}
 	
 	//informs trader
@@ -55,23 +55,23 @@ void Market::TraderStockPage::sendOrder(const Order& order) {
 void Market::TraderStockPage::confirmOrder(const Order& order) {
 	if (order.o_mode == "buy") {
 		//deletes sent orders of buy
-		for (auto tsp_order = tsp_orderques.oq_sent_ordersB.begin(); tsp_order != tsp_orderques.oq_sent_ordersB.end(); tsp_order++) {
+		for (auto tsp_order = tsp_orderques->oq_sent_ordersB.begin(); tsp_order != tsp_orderques->oq_sent_ordersB.end(); tsp_order++) {
 			if (order.o_orderID == tsp_order->o_orderID) {
-				tsp_orderques.oq_sent_ordersB.erase(tsp_order);
+				tsp_orderques->oq_sent_ordersB.erase(tsp_order);
 				break;
 			}
 		}
 		//adding it into confirmed secured volume
-		tsp_orderques.oq_confirmBuys.emplace_back(order);
+		tsp_orderques->oq_confirmBuys.emplace_back(order);
 		//updates current balance and volumes
 		tsp_currentBal -= (double)order.o_volume * (double)order.o_price;
 		tsp_volume += order.o_volume;
 	}
 	else if (order.o_mode == "sell") {
 		//deletes sent orders of sell
-		for (auto tsp_order = tsp_orderques.oq_sent_ordersS.begin(); tsp_order != tsp_orderques.oq_sent_ordersS.end(); tsp_order++) {
+		for (auto tsp_order = tsp_orderques->oq_sent_ordersS.begin(); tsp_order != tsp_orderques->oq_sent_ordersS.end(); tsp_order++) {
 			if (order.o_orderID == tsp_order->o_orderID) {
-				tsp_orderques.oq_sent_ordersS.erase(tsp_order);
+				tsp_orderques->oq_sent_ordersS.erase(tsp_order);
 				break;
 			}
 		}
@@ -87,9 +87,10 @@ void Market::TraderStockPage::confirmOrder(const Order& order) {
 //executes strategy for the stock
 void Market::TraderStockPage::executeStrat(){
 	std::string mode("null");
+	// trading Strat
 	TradeStrat::BasicStrat basicStrat;
-	int priceC = basicStrat.checkPriceChanges(*tsp_stock);
-	switch (priceC) {
+	int tradeDes = basicStrat.checkPriceChanges(*tsp_stock);
+	switch (tradeDes) {
 		case(-1):
 			mode = "sell";
 			break;
@@ -100,10 +101,13 @@ void Market::TraderStockPage::executeStrat(){
 			mode = "buy";
 			break;
 	}
-	if (mode == "null") return;
+	if (mode == "null" || (tsp_orderques->oq_confirmBuys.empty() && mode == "sell")) return;
 	std::cout << mode << std::endl;
-	std::cout << priceC << std::endl;
-	Market::Order order(*tsp_stock, tsp_ID, tsp_orderNum++, mode, 0 ,0);
+	//volume
+	VolStrat::VolPercentage volStrat(0.30f, tsp_volLim);
+	unsigned int tradeVol = volStrat.getVol_CurStock(*tsp_orderques, mode);
+
+	Market::Order order(*tsp_stock, tsp_ID, tsp_orderNum++, mode, tradeVol ,0);
 	sendOrder(order);
 	return;
 }
@@ -117,8 +121,6 @@ unsigned int Market::TraderStockPage::getID() const {
 bool Market::TraderStockPage::errorHandling() {
 	return false;
 }
-
-
 
 Market::TraderStockPage::~TraderStockPage() {}
 

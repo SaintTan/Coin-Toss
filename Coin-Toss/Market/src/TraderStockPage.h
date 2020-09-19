@@ -3,6 +3,7 @@
 #include "Order.h"
 #include <string>
 #include "BasicStrat.h"
+#include "VolPercentage.h"
 
 namespace Market {
 	class Trader;
@@ -14,7 +15,7 @@ namespace Market {
 		double tsp_profitLoss; //total profit loss
 		unsigned int tsp_volLim; //volume limit assigned to the stock
 		unsigned int tsp_volume; //current held volume
-		OrderQue tsp_orderques; //order que of stockpage
+		OrderQue* tsp_orderques; //order que of stockpage
 		Trader* tsp_trader; //trader
 		const Stock::Stock* tsp_stock; //store pointer to stock 
 	private:
