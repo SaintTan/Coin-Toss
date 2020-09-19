@@ -107,7 +107,7 @@ void Market::TraderStockPage::executeStrat(){
 	VolStrat::VolPercentage volStrat(0.30f, tsp_volLim);
 	unsigned int tradeVol = volStrat.getVol_CurStock(*tsp_orderques, mode);
 
-	Market::Order order(*tsp_stock, tsp_ID, tsp_orderNum++, mode, tradeVol ,0);
+	Market::Order order(*tsp_stock, tsp_orderNum++, tsp_ID, mode, tradeVol ,0);
 	sendOrder(order);
 	return;
 }

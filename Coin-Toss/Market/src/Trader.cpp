@@ -6,7 +6,7 @@ Market::Trader::Trader(unsigned int traderID, const std::vector<Stock::Stock*>& 
 	unsigned int tradePage_ID = 0;
 	for (auto stock : stocks) {
 		unsigned int vol = 1000;
-		t_stockpages.emplace_back(TraderStockPage(tradePage_ID++, *stock, t_currentBal/stocks.size(), vol, this));
+		t_stockpages.emplace_back(new TraderStockPage(tradePage_ID++, *stock, t_currentBal/stocks.size(), vol, this));
 	}
 }
 
@@ -21,7 +21,7 @@ bool Market::Trader::sendOrder(const Order& order, const TraderStockPage& stockP
 void Market::Trader::makeDecision() {
 	//goes through each stockpage and executing algorithm for the stocks
 	for (auto stockpage : t_stockpages) {
-		stockpage.executeStrat();
+		stockpage->executeStrat();
 	}
 }
 
@@ -36,8 +36,8 @@ void Market::Trader::orderConfirm(const Order& order) {
 	}
 	//informs stockpages of the confirmed orders
 	for (auto stockpage : t_stockpages) {
-		if (stockpage.getID() == order.o_orderID) {
-			stockpage.confirmOrder(order);
+		if (stockpage->getID() == order.o_orderID) {
+			stockpage->confirmOrder(order);
 			break;
 		}
 	}
