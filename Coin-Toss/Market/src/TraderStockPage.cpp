@@ -53,6 +53,8 @@ void Market::TraderStockPage::sendOrder(const Order& order) {
 
 //confirms order
 void Market::TraderStockPage::confirmOrder(const Order& order) {
+	std::cout << " ---- order confirm ----" << std::endl;
+	std::cout << order.o_mode << std::endl;
 	if (order.o_mode == "buy") {
 		//deletes sent orders of buy
 		for (auto tsp_order = tsp_orderques->oq_sent_ordersB.begin(); tsp_order != tsp_orderques->oq_sent_ordersB.end(); tsp_order++) {
@@ -107,7 +109,7 @@ void Market::TraderStockPage::executeStrat(){
 	VolStrat::VolPercentage volStrat(0.30f, tsp_volLim);
 	unsigned int tradeVol = volStrat.getVol_CurStock(*tsp_orderques, mode);
 
-	Market::Order order(*tsp_stock, tsp_orderNum++, tsp_ID, mode, tradeVol ,0);
+	Market::Order order(*tsp_stock, tsp_ID, tsp_orderNum++, mode, tradeVol ,0);
 	sendOrder(order);
 	return;
 }

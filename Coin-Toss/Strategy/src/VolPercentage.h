@@ -9,7 +9,7 @@ namespace VolStrat {
 		unsigned int vp_maxVol;
 	public:
 		VolPercentage(float, unsigned int);
-		unsigned int getVol(unsigned int);
+		unsigned int getVol(int);
 		unsigned int getVol_CurStock(const Market::OrderQue&, const std::string&);
 
 	protected:
