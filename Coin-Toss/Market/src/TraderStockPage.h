@@ -4,6 +4,7 @@
 #include <string>
 #include "BasicStrat.h"
 #include "VolPercentage.h"
+#include "GetBestPrice.h"
 
 namespace Market {
 	class Trader;

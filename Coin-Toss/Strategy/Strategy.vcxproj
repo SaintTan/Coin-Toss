@@ -149,10 +149,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GetBestPrice.cpp" />
     <ClCompile Include="src\BasicStrat.cpp" />
     <ClCompile Include="src\VolPercentage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GetBestPrice.h" />
     <ClInclude Include="src\BasicStrat.h" />
     <ClInclude Include="src\VolPercentage.h" />
   </ItemGroup>

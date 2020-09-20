@@ -12,6 +12,8 @@ double Market::TraderStockPage::calculateProfits(const Order& sold) {
 	double profits = 0;
 	while (remainingVol > 0) {
 		//compares volume differences
+		std::cout << " -cal-" << std::endl;
+		std::cout << remainingVol << std::endl;
 		if ((int)tsp_orderques->oq_confirmBuys.back().o_volume <= remainingVol) {
 			vol = tsp_orderques->oq_confirmBuys.back().o_volume;
 			//calculates profits
@@ -53,8 +55,6 @@ void Market::TraderStockPage::sendOrder(const Order& order) {
 
 //confirms order
 void Market::TraderStockPage::confirmOrder(const Order& order) {
-	std::cout << " ---- order confirm ----" << std::endl;
-	std::cout << order.o_mode << std::endl;
 	if (order.o_mode == "buy") {
 		//deletes sent orders of buy
 		for (auto tsp_order = tsp_orderques->oq_sent_ordersB.begin(); tsp_order != tsp_orderques->oq_sent_ordersB.end(); tsp_order++) {
@@ -80,6 +80,8 @@ void Market::TraderStockPage::confirmOrder(const Order& order) {
 		//calculates profits 
 		tsp_profitLoss += calculateProfits(order);
 		//updates current balance and volume
+		std::cout << " --- profit ---" << std::endl;
+		std::cout << tsp_profitLoss << std::endl;
 		tsp_currentBal += (double)order.o_volume * (double)order.o_price;
 		tsp_volume -= order.o_volume;
 	}
@@ -104,10 +106,18 @@ void Market::TraderStockPage::executeStrat(){
 			break;
 	}
 	if (mode == "null" || (tsp_orderques->oq_confirmBuys.empty() && mode == "sell")) return;
-	std::cout << mode << std::endl;
+	
 	//volume
 	VolStrat::VolPercentage volStrat(0.30f, tsp_volLim);
 	unsigned int tradeVol = volStrat.getVol_CurStock(*tsp_orderques, mode);
+
+	PriceStrat::GetBestPrice priceStrat;
+	float price = priceStrat.getPrice(*tsp_stock->getStockQue(), mode);
+
+	std::cout << "----- new trade -----" << std::endl;
+	std::cout << mode << std::endl;
+	std::cout << tradeVol << std::endl;
+	std::cout << price << std::endl;
 
 	Market::Order order(*tsp_stock, tsp_ID, tsp_orderNum++, mode, tradeVol ,0);
 	sendOrder(order);
