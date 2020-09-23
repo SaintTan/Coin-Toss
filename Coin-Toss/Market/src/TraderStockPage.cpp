@@ -115,7 +115,7 @@ void Market::TraderStockPage::executeStrat(){
 		price = priceStrat.getPrice(*tsp_stock->getStockQue(), "buy");
 	}
 	else if (mode == "buy") {
-		price = priceStrat.getPrice(*tsp_stock->getStockQue(), "buy");
+		price = priceStrat.getPrice(*tsp_stock->getStockQue(), "sell");
 	}
 	std::cout << "----- new trade -----" << std::endl;
 	std::cout << mode << std::endl;

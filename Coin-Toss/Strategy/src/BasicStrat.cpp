@@ -1,5 +1,4 @@
 #include "BasicStrat.h"
-#include <iostream>
 
 int TradeStrat::BasicStrat::checkPriceChanges(const Stock::Stock& stock) {
 	const Stock::StockQue* current = stock.getStockQue();
