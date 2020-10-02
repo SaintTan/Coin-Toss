@@ -7,10 +7,10 @@ namespace Stock {
 	struct CandleStickData {
 	private:
 	public:
-		unsigned int csd_tickInterval;
-		unsigned int csd_curTick;
+		uint32_t csd_tickInterval;
+		uint32_t csd_curTick;
 		std::vector<CandleStick>csd_candleSticks;
-		CandleStickData(float openingPrice, unsigned int tickInterval, unsigned int numRuns) : csd_tickInterval(tickInterval), csd_curTick(0) {
+		CandleStickData(float openingPrice, uint32_t tickInterval, uint32_t numRuns) : csd_tickInterval(tickInterval), csd_curTick(0) {
 			csd_candleSticks.reserve(numRuns); 
 			csd_candleSticks.emplace_back(CandleStick(openingPrice));
 		}
@@ -20,10 +20,10 @@ namespace Stock {
 	class CandleStickManager {
 	private:
 		std::vector<CandleStickData>csm_candleSticks;
-		unsigned int csm_numRuns;
-		unsigned int csm_numRecord;
+		uint32_t csm_numRuns;
+		uint32_t csm_numRecord;
 	public:
-		CandleStickManager(float, float, unsigned int, std::vector<unsigned int>&);
+		CandleStickManager(float, float, uint32_t, std::vector<uint32_t>&);
 		void updateCandleSticks(const StockQue&, const StockQue&);
 
 	protected:

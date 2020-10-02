@@ -11,7 +11,7 @@ void Data::Data::getDataNames(const std::wstring& source, std::vector<std::wstri
 }
 
 //reading in lines to update data
-void Data::Data::getData(unsigned int i, std::string& string) {
+void Data::Data::getData(uint32_t i, std::string& string) {
 	std::getline(sd_datastream[i], string);
 	//check for any errors
 	if (sd_datastream[i].bad()) {

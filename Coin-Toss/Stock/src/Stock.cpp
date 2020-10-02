@@ -1,7 +1,7 @@
 #include "Stock.h"
 #include <iostream>
 
-Stock::Stock::Stock(const std::wstring& stockID, StockQue& topPrices, std::vector<unsigned int>& csInterval)
+Stock::Stock::Stock(const std::wstring& stockID, StockQue& topPrices, std::vector<uint32_t>& csInterval)
 	:s_stockID(stockID), s_topCur(&topPrices), s_stockRecord(StockRecord(topPrices.mq_size)), s_totalVol(getTotalVol(topPrices)), 
 	s_candleStickManager(CandleStickManager(topPrices.mq_topPrice_S[0], topPrices.mq_topPrice_B[0], 5, csInterval)) {};
 
@@ -31,10 +31,10 @@ std::wstring Stock::Stock::get_stockID() const {
 }
 
 //calculates the total amount of volume inside the stock que
-static unsigned int getTotalVol(const Stock::StockQue& stockque) {
-	unsigned int totalVol = 0;
+static uint32_t getTotalVol(const Stock::StockQue& stockque) {
+	uint32_t totalVol = 0;
 	//goes through elements and add them together
-	for (unsigned int i = 0; i < stockque.mq_size; i++) {
+	for (uint32_t i = 0; i < stockque.mq_size; i++) {
 		totalVol += stockque.mq_topVol_B[i] + stockque.mq_topVol_S[i];
 	}
 	return totalVol;

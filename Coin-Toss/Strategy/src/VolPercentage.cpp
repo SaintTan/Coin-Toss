@@ -1,9 +1,9 @@
 #include "VolPercentage.h"
 #include <iostream>
 
-VolStrat::VolPercentage::VolPercentage(float percentage, unsigned int maxVol) : vp_percent(percentage),vp_maxVol(maxVol) {}
+VolStrat::VolPercentage::VolPercentage(float percentage, uint32_t maxVol) : vp_percent(percentage),vp_maxVol(maxVol) {}
 
-unsigned int VolStrat::VolPercentage::getVol(int curVol) {
+uint32_t VolStrat::VolPercentage::getVol(int curVol) {
 	if (curVol < 1) {
 		return 0;
 	}
@@ -11,7 +11,7 @@ unsigned int VolStrat::VolPercentage::getVol(int curVol) {
 	return tradeVol;
 }
 
-unsigned int VolStrat::VolPercentage::getVol_CurStock(const Market::OrderQue& orderQue, const std::string& mode) {
+uint32_t VolStrat::VolPercentage::getVol_CurStock(const Market::OrderQue& orderQue, const std::string& mode) {
 	int totalVol = 0;
 
 	if (!orderQue.oq_confirmBuys.empty()) {

@@ -8,14 +8,14 @@ namespace Market {
 	private:
 	public:
 		const Stock::Stock* o_stock; //pointer to stock
-		unsigned int o_orderID; //orderID
-		unsigned int o_sender;
+		uint32_t o_orderID; //orderID
+		uint32_t o_sender;
 		std::string o_mode; //mode of transaction
-		unsigned int o_volume; //volume
+		uint32_t o_volume; //volume
 		float o_price; //price
 		
 	public:
-		Order(const Stock::Stock& stock, unsigned int order_id, unsigned int sender, const std::string& mode, unsigned int volume, float price):
+		Order(const Stock::Stock& stock, uint32_t order_id, uint32_t sender, const std::string& mode, uint32_t volume, float price):
 			o_stock(&stock), o_orderID(order_id), o_sender(sender), o_mode(mode), o_volume(volume), o_price(price) {}
 	protected:
 	};
@@ -27,7 +27,7 @@ namespace Market {
 		std::vector<Order> oq_sent_ordersS; //stores sent sell orders
 		std::vector<Order> oq_confirmBuys; //stores orders of confirmed bought
 
-		OrderQue(unsigned int num) {
+		OrderQue(uint32_t num) {
 			oq_sent_ordersB.reserve(num);
 			oq_sent_ordersS.reserve(num);
 			oq_confirmBuys.reserve(num);

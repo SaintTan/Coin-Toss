@@ -2,7 +2,7 @@
 #include "Trader.h"
 #include <iostream>
 
-Market::TraderStockPage::TraderStockPage(unsigned int ID, const Stock::Stock& stock, double totalBal, unsigned int volLim, Trader* trader)
+Market::TraderStockPage::TraderStockPage(uint32_t ID, const Stock::Stock& stock, double totalBal, uint32_t volLim, Trader* trader)
 	: tsp_ID(ID),tsp_orderNum(0), tsp_stock(&stock), tsp_currentBal(totalBal), tsp_profitLoss(0),tsp_volLim(volLim), tsp_volume(0), tsp_trader(trader), tsp_orderques(new OrderQue(25)) {}
 
 //calculates profit from orders - uses LIFO
@@ -107,7 +107,7 @@ void Market::TraderStockPage::executeStrat(){
 	
 	//volume
 	VolStrat::VolPercentage volStrat(0.30f, tsp_volLim);
-	unsigned int tradeVol = volStrat.getVol_CurStock(*tsp_orderques, mode);
+	uint32_t tradeVol = volStrat.getVol_CurStock(*tsp_orderques, mode);
 
 	PriceStrat::GetBestPrice priceStrat;
 	float price = priceStrat.getPrice(*tsp_stock->getStockQue(), mode);
@@ -128,7 +128,7 @@ void Market::TraderStockPage::executeStrat(){
 }
 
 //returns current stock
-unsigned int Market::TraderStockPage::getID() const {
+uint32_t Market::TraderStockPage::getID() const {
 	return tsp_ID;
 }
 

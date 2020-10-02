@@ -6,11 +6,11 @@ namespace VolStrat {
 	class VolPercentage {
 	private:
 		float vp_percent;
-		unsigned int vp_maxVol;
+		uint32_t vp_maxVol;
 	public:
-		VolPercentage(float, unsigned int);
-		unsigned int getVol(int);
-		unsigned int getVol_CurStock(const Market::OrderQue&, const std::string&);
+		VolPercentage(float, uint32_t);
+		uint32_t getVol(int);
+		uint32_t getVol_CurStock(const Market::OrderQue&, const std::string&);
 
 	protected:
 	};

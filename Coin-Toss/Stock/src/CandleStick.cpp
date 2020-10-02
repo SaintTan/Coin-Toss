@@ -41,8 +41,8 @@ static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::St
 	//if price did not change
 	if (!buy_pdiff && !sell_pdiff) {
 		//determine difference in volume
-		unsigned int buy_vdiff = (unsigned int)(current.mq_topVol_B[0] - previous.mq_topPrice_B[0]);
-		unsigned int sell_vdiff = (unsigned int)(current.mq_topVol_S[0] - previous.mq_topPrice_S[0]);
+		uint32_t buy_vdiff = (uint32_t)(current.mq_topVol_B[0] - previous.mq_topPrice_B[0]);
+		uint32_t sell_vdiff = (uint32_t)(current.mq_topVol_S[0] - previous.mq_topPrice_S[0]);
 		if (buy_vdiff < 0) {
 			prices.lowestPrice = current.mq_topPrice_B[0];
 		}
@@ -59,7 +59,7 @@ static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::St
 		if (buy_pdiff > 0 && sell_pdiff > 0) {
 			prices.highestPrice = current.mq_topPrice_B.front();
 			prices.lowestPrice = previous.mq_topPrice_S.front();
-			for (unsigned int i = 1; i < previous.mq_size; i++) {
+			for (uint32_t i = 1; i < previous.mq_size; i++) {
 				if (current.mq_topPrice_B.front() < previous.mq_topPrice_S[i]) {
 					prices.highestPrice = previous.mq_topPrice_S[i-1];
 					break;
@@ -70,7 +70,7 @@ static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::St
 		else if (buy_pdiff < 0 && sell_pdiff < 0) {
 			prices.highestPrice = previous.mq_topPrice_B.front();
 			prices.lowestPrice = current.mq_topPrice_S.front();
-			for (unsigned int i = 1; i < previous.mq_size; i++) {
+			for (uint32_t i = 1; i < previous.mq_size; i++) {
 				if (current.mq_topPrice_S.front() > previous.mq_topPrice_B[i]) {
 					prices.lowestPrice = current.mq_topPrice_S[i - 1];
 					break;
@@ -90,7 +90,7 @@ static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::St
 		else if (buy_pdiff < 0) {
 			prices.highestPrice = previous.mq_topPrice_B.front();
 			prices.lowestPrice = previous.mq_topPrice_B.back();
-			for (unsigned int i = 1; i < previous.mq_size; i++) {
+			for (uint32_t i = 1; i < previous.mq_size; i++) {
 				if (current.mq_topPrice_B.front() > previous.mq_topPrice_B[i]) {
 					prices.lowestPrice = previous.mq_topPrice_B[i-1];
 					break;
@@ -101,7 +101,7 @@ static HighLowPrice traded_price(const Stock::StockQue& current, const Stock::St
 		else if (sell_pdiff > 0){
 			prices.highestPrice = previous.mq_topPrice_S.back();
 			prices.lowestPrice = previous.mq_topPrice_S.front();
-			for (unsigned int i = 1; i < previous.mq_size; i++) {
+			for (uint32_t i = 1; i < previous.mq_size; i++) {
 				if (current.mq_topPrice_S.front() < previous.mq_topPrice_S[i]) {
 					prices.highestPrice = previous.mq_topPrice_S[i - 1];
 					break;

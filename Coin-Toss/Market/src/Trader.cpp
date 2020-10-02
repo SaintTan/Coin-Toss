@@ -1,11 +1,11 @@
 #include "Trader.h"
 #include "Broker.h"
 
-Market::Trader::Trader(unsigned int traderID, const std::vector<Stock::Stock*>& stocks, Broker* broker): t_traderID(traderID), t_currentBal(100000), t_profitLoss(0), t_broker(broker){
+Market::Trader::Trader(uint32_t traderID, const std::vector<Stock::Stock*>& stocks, Broker* broker): t_traderID(traderID), t_currentBal(100000), t_profitLoss(0), t_broker(broker){
 	t_stockpages.reserve(stocks.size());
-	unsigned int tradePage_ID = 0;
+	uint32_t tradePage_ID = 0;
 	for (auto stock : stocks) {
-		unsigned int vol = 1000;
+		uint32_t vol = 1000;
 		t_stockpages.emplace_back(new TraderStockPage(tradePage_ID++, *stock, t_currentBal/stocks.size(), vol, this));
 	}
 }

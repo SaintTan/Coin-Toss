@@ -13,13 +13,13 @@ Data::DataManager::DataManager(std::vector<Stock::Stock*>& stocks):dm_stocksize(
 	dm_quedata = new QueData(stock_ids.size());
 	
 	//get time intervals
-	std::vector<unsigned int> intervals = {100};
+	std::vector<uint32_t> intervals = {100};
 
 	//reserving size for stocks
 	stocks.reserve(stock_ids.size());
 
 	//adding in stock elements
-	for (unsigned int i = 0; i < dm_stocksize; i++) {
+	for (uint32_t i = 0; i < dm_stocksize; i++) {
 		Stock::StockQue* stockque = dm_quedata->getStockQue(i);
 		stocks.emplace_back(new Stock::Stock(stock_ids[i], *stockque, intervals));
 	}
