@@ -1,5 +1,7 @@
 #pragma once
 #include "ConsoleLog.h"
+#include "FileLog.h"
+#include <fstream>
 #include <string>
 
 int main() {
