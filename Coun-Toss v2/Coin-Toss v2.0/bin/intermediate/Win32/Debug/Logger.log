@@ -1,4 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: The intermediate directory (C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coun-Toss v2\Coin-Toss v2.0\\bin\intermediate\Win32\Debug\) contains files shared from another project (MainApp.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   FileLog.cpp
-C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coun-Toss v2\Coin-Toss v2.0\Logger\src\FileLog.cpp(25): warning C4715: 'checkLevel': not all control paths return a value
+C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coun-Toss v2\Coin-Toss v2.0\Logger\src\FileLog.cpp(26): warning C4715: 'checkLevel': not all control paths return a value
   Logger.vcxproj -> C:\Users\myste\OneDrive\Desktop\Important Stuff\Programming stuff\Coin-toss\Coin-Toss\Coun-Toss v2\Coin-Toss v2.0\\bin\Win32\Debug\Logger.lib

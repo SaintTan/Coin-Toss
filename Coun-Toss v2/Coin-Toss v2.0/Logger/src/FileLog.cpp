@@ -3,7 +3,9 @@
 
 static std::string checkLevel(Logger::MessageLevel);
 
-Logger::FileLog::FileLog(std::ostream& targetFile) : targetFile(targetFile){}
+Logger::FileLog::FileLog(const std::string& fileLoc, const std::string& fileName):targetFile(fileLoc+fileName){}
+
+Logger::FileLog::FileLog(const std::string& fileName) : targetFile(fileName) {}
 
 void Logger::FileLog::LogMessage(const std::string& message, Logger::MessageLevel level) {
 	std::string mainMessage =checkLevel(level) + message + "\n";

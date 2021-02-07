@@ -1,15 +1,16 @@
 #pragma once
 #include "MainLog.h"
-#include <ostream>
-#include <string>
+#include <fstream>
 
 namespace Logger{
 	class FileLog : public MainLog {
 	private:
-		std::ostream& targetFile;
+		std::ofstream targetFile;
 	public:
-		FileLog(std::ostream& targetFile);
+		FileLog(const std::string&, const std::string&);
+		FileLog(const std::string&);
 		void LogMessage(const std::string& message, MessageLevel);
+	
 	};
 }
 
