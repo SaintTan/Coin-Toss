@@ -8,7 +8,7 @@ namespace Logger {
 
 	class MainLog {
 	public:
-		virtual void LogMessage(const std::string&, MessageLevel) = 0;
+		virtual void LogMessage(const std::string& message, MessageLevel level) = 0;
 	};
 }
 

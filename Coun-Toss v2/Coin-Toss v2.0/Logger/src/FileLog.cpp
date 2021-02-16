@@ -23,5 +23,6 @@ static std::string checkLevel(Logger::MessageLevel level) {
 	case (Logger::MessageLevel::Trade):
 		return "[Trade] : ";
 	}
+	return "";
 }
 

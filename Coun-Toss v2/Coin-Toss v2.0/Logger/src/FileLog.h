@@ -7,9 +7,9 @@ namespace Logger{
 	private:
 		std::ofstream targetFile;
 	public:
-		FileLog(const std::string&, const std::string&);
-		FileLog(const std::string&);
-		void LogMessage(const std::string& message, MessageLevel);
+		FileLog(const std::string& fileLoc, const std::string& fileName);
+		FileLog(const std::string& fileLoc);
+		void LogMessage(const std::string& message, MessageLevel level);
 	
 	};
 }

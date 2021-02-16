@@ -1,11 +1,9 @@
 #pragma once
 #include "ConsoleLog.h"
+#include "DataManager.h"
 #include "FileLog.h"
-#include <fstream>
 #include <string>
 
 int main() {
-	Logger::ConsoleLog::LogMessage("wowzers", Logger::MessageLevel::Message);
-	Logger::FileLog Logtemp("test.txt");
-	Logtemp.LogMessage("man", Logger::MessageLevel::Message);
+	Data::DataManager dataManager(Data::FileType::RealTime, "hello.com");
 }
