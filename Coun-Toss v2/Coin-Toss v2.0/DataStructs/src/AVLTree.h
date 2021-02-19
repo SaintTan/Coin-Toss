@@ -14,7 +14,8 @@ namespace DataStruct {
 		void updateParent(AVLnode* newParent);
 		void updateLeft(AVLnode* newLeft);
 		void updateRight(AVLnode* newRight);
-		void updateAll(AVLnode& newParent, AVLnode& newLeft, AVLnode& newRight);
+		void checkNUpdate (AVLnode* targetNode);
+		void updateAll(AVLnode* newParent, AVLnode* newLeft, AVLnode* newRight);
 		T& getData();
 		AVLnode<T>* getParent();
 		AVLnode<T>* getLeft();
@@ -28,18 +29,21 @@ namespace DataStruct {
 		AVLnode<T>* startNode;
 	public:
 		AVLTree(T&);
-		void insertNode(T& newNode);
-		void printTree();
-		
-	//	&T searchNode(AVLnode<T>&);
-	//	void deleteNode(AVLnode<T>&);
+		void insertNode(T& data);
+		void deleteNode(T& data);
+		AVLnode<T>* searchNode(T& data);
+		void workTree(void (*passedFunc)(T&));
 	private:
 		void rotateLeft(AVLnode<T>* node);
 		void rotateRight(AVLnode<T>* node);	
-		void insertNode(T& newNode, AVLnode<T>* parentNode);
-		void printTree(AVLnode<T>* node);
+		void insertNode(T& data, AVLnode<T>* parentNode);
+		void balanceAlgo(AVLnode<T>* node);
+		int findHeight(AVLnode<T>* node);
 		int findImbal(AVLnode<T>* node);
-		
+		void deleteNode(T& data, AVLnode<T>* node);
+		AVLnode<T>* searchNode(T& data, AVLnode<T>* node);
+		AVLnode<T>* searchMinimum(AVLnode<T>* node);
+		void workTree(AVLnode<T>* node, void (*passedFunc)(T&));
 	};
 }
 
@@ -79,70 +83,150 @@ void DataStruct::AVLTree<T>::insertNode(T& newData, AVLnode<T>* parentNode) {
 		}
 		else insertNode(newData, parentNode->getLeft());
 	}
-	int balance = findImbal(parentNode);
-	//left side imbalance
-	if (balance < -1) {
-		balance = findImbal(parentNode->getLeft());
-		if (balance > 0) rotateLeft(parentNode->getLeft());
-		rotateRight(parentNode);
-	}
-	//right side imbalance
-	else if (balance > 1) {
-		balance = findImbal(parentNode->getRight());
-		if (balance < 0) rotateRight(parentNode->getRight());
-		rotateLeft(parentNode);
-	}
+	balanceAlgo(parentNode);
 };
 
 template<class T>
+void DataStruct::AVLTree<T>::deleteNode(T& data) {
+	deleteNode(data, startNode);
+}
+
+template<class T>
+void DataStruct::AVLTree<T>::deleteNode(T& data, AVLnode<T>* targetNode) {
+	if (data > targetNode->getData()) {
+		deleteNode(data, targetNode->getRight());
+	}
+	else if (data < targetNode->getData()) {
+		deleteNode(data, targetNode->getLeft());
+	}
+	else if (data == targetNode->getData()) {
+		if (!targetNode->getLeft() && !targetNode->getRight()) {
+			targetNode->checkNUpdate(NULL);
+		}
+
+		else if (!targetNode->getLeft() && targetNode->getRight()) {
+			targetNode->checkNUpdate(targetNode->getRight());
+		}
+
+		else if (!targetNode->getRight() && targetNode->getLeft()) {
+			targetNode->checkNUpdate(targetNode->getLeft());
+		}
+
+		else {
+			AVLnode<T>* minimumNode = searchMinimum(targetNode->getRight());
+			if(targetNode->getParent()) targetNode->getParent()->checkNUpdate(minimumNode);
+			minimumNode->checkNUpdate(minimumNode->getRight());
+			minimumNode->updateParent(targetNode->getParent());
+		}
+		delete targetNode;
+		return;
+	}
+	balanceAlgo(targetNode);
+	return;
+
+}
+
+template<class T>
+int DataStruct::AVLTree<T>::findHeight(AVLnode<T>* node) {
+	if (!node) return 0;
+	int left = findHeight(node->getLeft());
+	int right = findHeight(node->getRight());
+	return(1 + (left > right ? left : right));
+}
+
+template<class T>
 int DataStruct::AVLTree<T>::findImbal(AVLnode<T>* node) {
-	if (node == NULL) return 1;
-	return findImbal(node->getLeft()) - findImbal(node->getRight());
+	return findHeight(node->getLeft()) - findHeight(node->getRight());
+}
+
+template<class T>
+void DataStruct::AVLTree<T>::balanceAlgo(AVLnode<T>* node) {
+	int balance = findImbal(node);
+	//left side imbalance
+	if (balance > 1) {
+		balance = findImbal(node->getLeft());
+		if (balance < 0) rotateLeft(node->getLeft());
+		rotateRight(node);
+	}
+	//right side imbalance
+	else if (balance < -1) {
+		balance = findImbal(node->getRight());
+		if (balance > 0) rotateRight(node->getRight());
+		rotateLeft(node);
+	}
+}
+
+template<class T>
+DataStruct::AVLnode<T>* DataStruct::AVLTree<T>::searchNode(T& data) {
+	return searchNode(data, startNode);
+}
+
+template<class T>
+DataStruct::AVLnode<T>* DataStruct::AVLTree<T>::searchNode(T& data, AVLnode<T>* node) {
+	if (data > node->getData()) {
+		return searchNode(data, node->getRight());
+	}
+	else if (data < node->getData()) {
+		return searchNode(data, node->getLeft());
+	}
+	else if (data == node->getData()) {
+		return node;
+	}
+
+	return NULL;
 }
 
 template<class T>
 void DataStruct::AVLTree<T>::rotateLeft(AVLnode<T>* node) {
 	AVLnode<T>* targetNode = node->getRight();
-	if (!node->getParent()) {
-		startNode = node;
-		node->updateParent(NULL);
-	}
-	else {
-		if (node->getParent()->getLeft() == node) {
-			node->getParent()->updateLeft(targetNode);
-		}
-		else {
-			node->getParent()->updateRight(targetNode);
-		}
-	}
+	
 	
 	targetNode->updateParent(node->getParent());
 	node->updateRight(targetNode->getLeft());
-	node->updateParent(targetNode);
 	if(targetNode->getLeft()) targetNode->getLeft()->updateParent(node);
 	targetNode->updateLeft(node);
+
+	if (!node->getParent()) {
+		startNode = targetNode;
+	}
+	else {
+		node->checkNUpdate(targetNode);
+	}
+	node->updateParent(targetNode);
 }
 
 template<class T>
 void DataStruct::AVLTree<T>::rotateRight(AVLnode<T>* node) {
 	AVLnode<T>* targetNode = node->getLeft();
-	if (!node->getParent()) {
-		startNode = node;
-		node->updateParent(NULL);
-	}
-	else {
-		if (node->getParent()->getLeft() == node) {
-			node->getParent()->updateLeft(targetNode);
-		}
-		else {
-			node->getParent()->updateRight(targetNode);
-		}
-	}
+	
 	targetNode->updateParent(node->getParent());
 	node->updateLeft(targetNode->getRight());
-	node->updateParent(targetNode);
 	if (targetNode->getRight()) targetNode->getRight()->updateParent(node);
 	targetNode->updateRight(node);
+
+	if (!node->getParent()) {
+		startNode = targetNode;
+	}
+	else {
+		node->checkNUpdate(targetNode);
+	}
+	node->updateParent(targetNode);
+}
+
+template<class T>
+void DataStruct::AVLnode<T>::checkNUpdate(AVLnode<T>* targetNode) {
+	if (this->getParent()->getLeft() == this) {
+		this->getParent()->updateLeft(targetNode);
+	}
+	else {
+		this->getParent()->updateRight(targetNode);
+	}
+}
+
+template<class T>
+DataStruct::AVLnode<T>* DataStruct::AVLTree<T>::searchMinimum(AVLnode<T>* node) {
+	if (!node->getLeft()) return node;
+	return(searchMinimum(node->getLeft()));
 }
 
 template <class T>
@@ -164,10 +248,10 @@ void DataStruct::AVLnode<T>::updateRight(AVLnode<T>* node) {
 }
 
 template <class T>
-void DataStruct::AVLnode<T>::updateAll(AVLnode<T>& newParent, AVLnode<T>& newLeft, AVLnode<T>& newRight) {
-	this->parent = &newParent;
-	this->left = &newLeft;
-	this->right = &newRight;
+void DataStruct::AVLnode<T>::updateAll(AVLnode<T>* newParent, AVLnode<T>* newLeft, AVLnode<T>* newRight) {
+	this->parent = newParent;
+	this->left = newLeft;
+	this->right = newRight;
 }
 
 template <class T>
@@ -191,13 +275,14 @@ DataStruct::AVLnode<T>* DataStruct::AVLnode<T>::getRight() {
 }
 
 template<class T>
-void DataStruct::AVLTree<T>::printTree() {
-	printTree(startNode);
+void DataStruct::AVLTree<T>::workTree(void (*passedFunc)(T&)) {
+	workTree(startNode, passedFunc);
 }
 
 template <class T>
-void DataStruct::AVLTree<T>::printTree(AVLnode<T>* node) {
+void DataStruct::AVLTree<T>::workTree(AVLnode<T>* node, void (*passedFunc)(T&)) {
 	if (!node) return;
-	printTree(node->getLeft());
-	printTree(node->getRight());
+	workTree(node->getLeft(), passedFunc);
+	passedFunc(node->getData());
+	workTree(node->getRight(), passedFunc);
 }
