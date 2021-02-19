@@ -3,7 +3,7 @@
 Data::Simulation::Simulation(const std::string& fileLoc, const std::string& fileName) : readFile(fileLoc + fileName) {};
 Data::Simulation::Simulation(const std::string& file) : readFile(file) {};
 
-void Data::Simulation::readData(std::string& temp) {
+void Data::Simulation::readData(std::string& temp){
 	if (readFile.eof()) {
 		readFile.close();
 	}

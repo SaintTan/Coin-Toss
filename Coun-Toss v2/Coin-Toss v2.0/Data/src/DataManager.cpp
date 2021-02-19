@@ -5,15 +5,12 @@
 static float convert_to_float(const std::string& temp);
 static void format_SC(const std::string& data);
 
-Data::DataManager::DataManager(Data::FileType filetype, const std::string& loc, const std::string& name):
-	dataSource(*Data::DataManager::DataSourceFactory(filetype, loc, name)), market(*(new Market())){}
+Data::DataManager::DataManager(Data::FileType filetype, const std::string& loc, const std::string& name): market(*(new Market(loc+name, DataSourceFactory(filetype, loc+name)))){}
 
-Data::DataManager::DataManager(Data::FileType filetype, const std::string& name): 
-	dataSource(*Data::DataManager::DataSourceFactory(filetype, name)), market(*(new Market())){}
+Data::DataManager::DataManager(Data::FileType filetype, const std::string& name): market(*(new Market(name, DataSourceFactory(filetype, name)))){}
 
 void Data::DataManager::updateData() {
 	std::string temp;
-
 }
 
 Data::DataSource* Data::DataManager::DataSourceFactory(Data::FileType filetype, const std::string& loc, const std::string& name) {

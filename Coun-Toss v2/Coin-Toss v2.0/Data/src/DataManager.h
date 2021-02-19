@@ -12,7 +12,6 @@ namespace Data {
 	class DataManager {
 	private:
 		DataStruct::AVLTree<Market> market;
-		DataStruct::AVLTree<DataSource> dataSource;
 	public:
 		DataManager(FileType, const std::string& loc, const std::string& name);
 		DataManager(FileType, const std::string& name);
