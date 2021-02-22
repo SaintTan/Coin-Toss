@@ -114,8 +114,13 @@ void DataStruct::AVLTree<T>::deleteNode(T& data, AVLnode<T>* targetNode) {
 
 		else {
 			AVLnode<T>* minimumNode = searchMinimum(targetNode->getRight());
-			if(targetNode->getParent()) targetNode->getParent()->checkNUpdate(minimumNode);
-			minimumNode->checkNUpdate(minimumNode->getRight());
+			if (!targetNode->getParent()) startNode = minimumNode;
+			else targetNode->checkNUpdate(minimumNode);
+			if (targetNode->getLeft()) targetNode->getLeft()->updateParent(minimumNode);
+			if (targetNode->getRight()) targetNode->getRight()->updateParent(minimumNode);
+			if (minimumNode->getParent()) minimumNode->checkNUpdate(NULL);
+			minimumNode->updateLeft(targetNode->getLeft());
+			minimumNode->updateRight(targetNode->getRight());
 			minimumNode->updateParent(targetNode->getParent());
 		}
 		delete targetNode;

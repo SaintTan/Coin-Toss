@@ -13,13 +13,6 @@ void printThings(T data) {
 }
 
 int main() {
-	int number = 10;
-	DataStruct::AVLTree<int> numberTree(number);
 
-	for(int i = 0; i<10; i++) numberTree.insertNode(*(new int(i)));
-
-	numberTree.workTree(printThings);
-
-	std::cout << (numberTree.searchNode(number)->getData()) << std::endl;
 }
 
