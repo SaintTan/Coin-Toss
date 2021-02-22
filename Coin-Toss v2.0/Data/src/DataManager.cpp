@@ -2,15 +2,14 @@
 #include "Simulation.h"
 #include "RealTime.h"
 
-static float convert_to_float(const std::string& temp);
-static void format_SC(const std::string& data);
+void updateMarket(Data::Market& market);
 
-Data::DataManager::DataManager(Data::FileType filetype, const std::string& loc, const std::string& name): market(*(new Market(loc+name, DataSourceFactory(filetype, loc+name)))){}
+Data::DataManager::DataManager(Data::FileType filetype, const std::string& loc, const std::string& name): markets(*(new Market(loc+name, DataSourceFactory(filetype, loc+name)))){}
 
-Data::DataManager::DataManager(Data::FileType filetype, const std::string& name): market(*(new Market(name, DataSourceFactory(filetype, name)))){}
+Data::DataManager::DataManager(Data::FileType filetype, const std::string& name): markets(*(new Market(name, DataSourceFactory(filetype, name)))){}
 
 void Data::DataManager::updateData() {
-	std::string temp;
+	markets.workTree(updateMarket);
 }
 
 Data::DataSource* Data::DataManager::DataSourceFactory(Data::FileType filetype, const std::string& loc, const std::string& name) {
@@ -26,16 +25,7 @@ Data::DataSource* Data::DataManager::DataSourceFactory(Data::FileType filetype, 
 	return new Data::Simulation(name);
 }
 
-static float convert_to_float(const std::string& temp) {
-	std::size_t found = temp.find(',');
-	if (found) {
-		return std::stof(temp.substr(0, found));
-	}
-	return std::stof(temp);
+void updateMarket(Data::Market& market) {
+	market.updateStocks();
 }
 
-static void format_SC(const std::string& data) {
-	while (data.find(',')) {
-		convert_to_float(data);
-	}
-}

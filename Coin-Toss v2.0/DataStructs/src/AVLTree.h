@@ -48,7 +48,6 @@ namespace DataStruct {
 }
 
 //instantiation
-
 template <class T>
 DataStruct::AVLnode<T>::AVLnode(T& data) : data(data), left(NULL), right(NULL), parent(NULL) {};
 
@@ -59,7 +58,7 @@ template<class T>
 DataStruct::AVLTree<T>::AVLTree(T& data) : startNode(new AVLnode<T>(data)) {};
 
 //AVLTree implementation
-
+//Inserting Node
 template<class T>
 void DataStruct::AVLTree<T>::insertNode(T& newData) {
 	insertNode(newData, startNode);
@@ -86,6 +85,7 @@ void DataStruct::AVLTree<T>::insertNode(T& newData, AVLnode<T>* parentNode) {
 	balanceAlgo(parentNode);
 };
 
+//Deleting Nodes
 template<class T>
 void DataStruct::AVLTree<T>::deleteNode(T& data) {
 	deleteNode(data, startNode);
@@ -131,6 +131,8 @@ void DataStruct::AVLTree<T>::deleteNode(T& data, AVLnode<T>* targetNode) {
 
 }
 
+
+//Returns MaxHeight of subtree
 template<class T>
 int DataStruct::AVLTree<T>::findHeight(AVLnode<T>* node) {
 	if (!node) return 0;
@@ -139,28 +141,33 @@ int DataStruct::AVLTree<T>::findHeight(AVLnode<T>* node) {
 	return(1 + (left > right ? left : right));
 }
 
+//returns left or right imbalance
 template<class T>
 int DataStruct::AVLTree<T>::findImbal(AVLnode<T>* node) {
 	return findHeight(node->getLeft()) - findHeight(node->getRight());
 }
 
+//Balancing algorithm for AVL tree
 template<class T>
 void DataStruct::AVLTree<T>::balanceAlgo(AVLnode<T>* node) {
 	int balance = findImbal(node);
 	//left side imbalance
 	if (balance > 1) {
 		balance = findImbal(node->getLeft());
+		//left + right side imbalance
 		if (balance < 0) rotateLeft(node->getLeft());
 		rotateRight(node);
 	}
 	//right side imbalance
 	else if (balance < -1) {
 		balance = findImbal(node->getRight());
+		//right + left side imbalance
 		if (balance > 0) rotateRight(node->getRight());
 		rotateLeft(node);
 	}
 }
 
+//Node searching
 template<class T>
 DataStruct::AVLnode<T>* DataStruct::AVLTree<T>::searchNode(T& data) {
 	return searchNode(data, startNode);
@@ -181,11 +188,10 @@ DataStruct::AVLnode<T>* DataStruct::AVLTree<T>::searchNode(T& data, AVLnode<T>* 
 	return NULL;
 }
 
+//Node left rotation
 template<class T>
 void DataStruct::AVLTree<T>::rotateLeft(AVLnode<T>* node) {
 	AVLnode<T>* targetNode = node->getRight();
-	
-	
 	targetNode->updateParent(node->getParent());
 	node->updateRight(targetNode->getLeft());
 	if(targetNode->getLeft()) targetNode->getLeft()->updateParent(node);
@@ -200,10 +206,10 @@ void DataStruct::AVLTree<T>::rotateLeft(AVLnode<T>* node) {
 	node->updateParent(targetNode);
 }
 
+//Node right rotation
 template<class T>
 void DataStruct::AVLTree<T>::rotateRight(AVLnode<T>* node) {
 	AVLnode<T>* targetNode = node->getLeft();
-	
 	targetNode->updateParent(node->getParent());
 	node->updateLeft(targetNode->getRight());
 	if (targetNode->getRight()) targetNode->getRight()->updateParent(node);
@@ -218,6 +224,7 @@ void DataStruct::AVLTree<T>::rotateRight(AVLnode<T>* node) {
 	node->updateParent(targetNode);
 }
 
+//Updates parent
 template<class T>
 void DataStruct::AVLnode<T>::checkNUpdate(AVLnode<T>* targetNode) {
 	if (this->getParent()->getLeft() == this) {
@@ -228,28 +235,27 @@ void DataStruct::AVLnode<T>::checkNUpdate(AVLnode<T>* targetNode) {
 	}
 }
 
+//searchMinimum of a node
 template<class T>
 DataStruct::AVLnode<T>* DataStruct::AVLTree<T>::searchMinimum(AVLnode<T>* node) {
 	if (!node->getLeft()) return node;
 	return(searchMinimum(node->getLeft()));
 }
 
+//Node updates
 template <class T>
 void DataStruct::AVLnode<T>::updateParent(AVLnode<T>* node) {
-	if (node) this->parent = node;
-	else this->parent = NULL;
+	this->parent = node;
 }
 
 template <class T>
 void DataStruct::AVLnode<T>::updateLeft(AVLnode<T>* node) {
-	if (node) this->left = node;
-	else this->left = NULL;
+	this->left = node;
 }
 
 template <class T>
 void DataStruct::AVLnode<T>::updateRight(AVLnode<T>* node) {
-	if (node) this->right = node;
-	else this->right = NULL;
+	this->right = node;
 }
 
 template <class T>
@@ -259,6 +265,7 @@ void DataStruct::AVLnode<T>::updateAll(AVLnode<T>* newParent, AVLnode<T>* newLef
 	this->right = newRight;
 }
 
+//Get functions
 template <class T>
 T& DataStruct::AVLnode<T>::getData() {
 	return data;
@@ -279,6 +286,7 @@ DataStruct::AVLnode<T>* DataStruct::AVLnode<T>::getRight() {
 	return right;
 }
 
+//Function to a pply to every node in tree, passes data stored in tree as argument, depth first search algorithm going from the smallest to biggest
 template<class T>
 void DataStruct::AVLTree<T>::workTree(void (*passedFunc)(T&)) {
 	workTree(startNode, passedFunc);
