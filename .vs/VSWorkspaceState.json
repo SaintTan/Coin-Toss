@@ -2,10 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Coin-Toss v2.0",
-    "\\Coin-Toss v2.0\\src",
-    "\\Coin-Toss v2.0\\src\\lib\\quickfix",
-    "\\Coun-Toss v2"
+    "\\Coin-Toss v2.0\\.vs\\Coin-Toss v2.0",
+    "\\Coin-Toss v2.0\\.vs\\Coin-Toss v2.0\\v16"
   ],
-  "SelectedNode": "\\Coin-Toss v2.0\\src\\lib",
+  "SelectedNode": "\\Coin-Toss v2.0\\src",
   "PreviewInSolutionExplorer": false
 }
